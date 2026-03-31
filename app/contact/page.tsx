@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Globe, Mail, MapPin, Phone, Store } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { ContactForm } from "@/components/ContactForm";
@@ -10,7 +11,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/data/site";
 import { pick } from "@/lib/i18n";
 
-export default function ContactPage() {
+function ContactPageContent() {
   const { language } = useAppPreferences();
   const searchParams = useSearchParams();
   const defaultType = searchParams.get("type") === "distributor" ? "distributor" : "general";
@@ -120,15 +121,15 @@ export default function ContactPage() {
             <h2 className="text-lg font-semibold tracking-tight">
               {defaultType === "distributor"
                 ? pick(language, {
-                    en: "Distributor Enquiry Form",
-                    hi: "डिस्ट्रीब्यूटर पूछताछ फॉर्म",
-                    gu: "ડિસ્ટ્રિબ્યુટર પૂછપરછ ફોર્મ",
-                  })
+                  en: "Distributor Enquiry Form",
+                  hi: "डिस्ट्रीब्यूटर पूछताछ फॉर्म",
+                  gu: "ડિસ્ટ્રિબ્યુટર પૂછપરછ ફોર્મ",
+                })
                 : pick(language, {
-                    en: "Contact Form",
-                    hi: "संपर्क फॉर्म",
-                    gu: "સંપર્ક ફોર્મ",
-                  })}
+                  en: "Contact Form",
+                  hi: "संपर्क फॉर्म",
+                  gu: "સંપર્ક ફોર્મ",
+                })}
             </h2>
             <p className="mt-2 text-sm text-foreground/72">
               {pick(language, {
@@ -167,5 +168,13 @@ export default function ContactPage() {
         </div>
       </Container>
     </section>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={null}>
+      <ContactPageContent />
+    </Suspense>
   );
 }

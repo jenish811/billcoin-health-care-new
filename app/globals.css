@@ -12,6 +12,17 @@
   --accent: #f5c542;
   --shadow-soft: 0 18px 48px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 24px 60px rgba(15, 23, 42, 0.12);
+  --font-app-sans:
+    "Aptos",
+    "Segoe UI Variable Display",
+    "Segoe UI",
+    "Trebuchet MS",
+    sans-serif;
+  --font-app-mono:
+    "Cascadia Code",
+    "Aptos Mono",
+    "Consolas",
+    monospace;
 }
 
 .dark {
@@ -38,8 +49,8 @@
   --color-primary-2: var(--primary-2);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-app-sans);
+  --font-mono: var(--font-app-mono);
 }
 
 @layer base {
