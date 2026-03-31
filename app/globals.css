@@ -13,10 +13,24 @@
   --shadow-soft: 0 18px 48px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 24px 60px rgba(15, 23, 42, 0.12);
   --font-app-sans:
-    "Aptos",
+    var(--font-next-sans-latin),
+    "Plus Jakarta Sans",
     "Segoe UI Variable Display",
     "Segoe UI",
     "Trebuchet MS",
+    sans-serif;
+  --font-app-display:
+    var(--font-next-display-latin),
+    var(--font-app-sans);
+  --font-app-sans-hi:
+    var(--font-next-sans-hi),
+    "Noto Sans Devanagari",
+    "Nirmala UI",
+    sans-serif;
+  --font-app-sans-gu:
+    var(--font-next-sans-gu),
+    "Noto Sans Gujarati",
+    "Shruti",
     sans-serif;
   --font-app-mono:
     "Cascadia Code",
@@ -50,6 +64,7 @@
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --font-sans: var(--font-app-sans);
+  --font-display: var(--font-app-display);
   --font-mono: var(--font-app-mono);
 }
 
@@ -71,6 +86,30 @@
       linear-gradient(180deg, color-mix(in oklab, var(--background) 92%, white 8%), var(--background));
     color: var(--foreground);
     font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  html:lang(hi),
+  html:lang(hi-IN) {
+    --font-app-sans: var(--font-app-sans-hi);
+    --font-app-display: var(--font-app-sans-hi);
+  }
+
+  html:lang(gu),
+  html:lang(gu-IN) {
+    --font-app-sans: var(--font-app-sans-gu);
+    --font-app-display: var(--font-app-sans-gu);
   }
 
   * {
@@ -92,11 +131,9 @@
   }
 
   .grid-soft {
-    background-image: radial-gradient(
-        circle at 1px 1px,
+    background-image: radial-gradient(circle at 1px 1px,
         color-mix(in oklab, var(--foreground) 10%, transparent) 1px,
-        transparent 0
-      );
+        transparent 0);
     background-size: 20px 20px;
   }
 

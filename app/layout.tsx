@@ -1,10 +1,36 @@
 import type { Metadata } from "next";
+import {
+  Noto_Sans_Devanagari,
+  Noto_Sans_Gujarati,
+  Plus_Jakarta_Sans,
+  Sora,
+} from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AppPreferencesProvider } from "@/components/providers/AppPreferencesProvider";
 import { siteConfig } from "@/data/site";
+
+const appSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-next-sans-latin",
+});
+
+const appDisplay = Sora({
+  subsets: ["latin"],
+  variable: "--font-next-display-latin",
+});
+
+const appHindi = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  variable: "--font-next-sans-hi",
+});
+
+const appGujarati = Noto_Sans_Gujarati({
+  subsets: ["gujarati"],
+  variable: "--font-next-sans-gu",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -32,7 +58,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN" suppressHydrationWarning className="h-full antialiased">
+    <html
+      lang="en-IN"
+      suppressHydrationWarning
+      className={`h-full antialiased ${appSans.variable} ${appDisplay.variable} ${appHindi.variable} ${appGujarati.variable}`}
+    >
       <body className="min-h-full flex flex-col">
         <Script id="billcoin-preferences" strategy="beforeInteractive">
           {`try {
