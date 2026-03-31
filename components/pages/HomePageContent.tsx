@@ -158,25 +158,28 @@ export function HomePageContent() {
 
           <div className="surface-panel rounded-[36px] p-5 sm:p-6">
             <div className="grid gap-4">
-              <div className="relative overflow-hidden rounded-[30px] bg-white/92 p-5 shadow-sm ring-1 ring-border/40 dark:bg-white">
-                <div className="absolute right-4 top-4 rounded-full bg-primary/12 px-3 py-1 text-xs font-semibold text-primary">
-                  {pick(language, {
-                    en: "Best Seller",
-                    hi: "बेस्ट सेलर",
-                    gu: "બેસ્ટ સેલર",
-                  })}
+              <div className="group relative overflow-hidden rounded-[30px] bg-gradient-to-br from-primary/12 via-background/95 to-secondary/10 p-5 shadow-sm ring-1 ring-border/40">
+                <div className="absolute inset-0 opacity-60 [background:radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_34%)]" />
+                <div className="relative flex justify-end">
+                  <div className="rounded-full bg-primary/12 px-3 py-1 text-xs font-semibold text-primary">
+                    {pick(language, {
+                      en: "Best Seller",
+                      hi: "बेस्ट सेलर",
+                      gu: "બેસ્ટ સેલર",
+                    })}
+                  </div>
                 </div>
-                <div className="relative aspect-[4/3]">
+                <div className="relative mx-2 mt-4 aspect-[11/10] overflow-hidden rounded-[22px] bg-white/94 p-2 shadow-sm ring-1 ring-border/40 dark:bg-white">
                   <Image
                     src={leadProduct?.variants[0]?.image ?? "/images/hero-cleaning.png"}
                     alt={leadProduct?.title ?? "Billcoin product"}
                     fill
-                    className="object-contain p-4"
-                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    className="scale-[1.18] object-contain p-2 transition duration-300 group-hover:scale-[1.14]"
+                    sizes="(max-width: 768px) 92vw, (max-width: 1024px) 100vw, 42vw"
                     priority
                   />
                 </div>
-                <div className="mt-3">
+                <div className="relative mt-4 rounded-[24px] border border-border bg-background/72 p-4">
                   <p className="text-sm font-semibold text-foreground/65">
                     {pick(language, {
                       en: "Starting from",
