@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ShieldCheck, Sparkles, Store } from "lucide-react";
@@ -11,7 +11,6 @@ import { easing } from "@/lib/motion";
 export function HomeHero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 grid-soft opacity-60" />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
       <FloatingBlobs />
 
@@ -81,3 +80,5 @@ export function HomeHero() {
     </section>
   );
 }
+
+

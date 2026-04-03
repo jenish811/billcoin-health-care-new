@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -51,16 +51,16 @@ export function CategoryCard({
 
   return (
     <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
-      <Card className="group h-full overflow-hidden">
-        <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 p-5">
+       <Card className="group flex h-full flex-col overflow-hidden">
+        <div className="surface-showcase relative overflow-hidden rounded-[28px] p-5">
           <div className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_32%)]" />
           <div className="relative flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">
                 {pick(language, {
                   en: "Category",
-                  hi: "Ã Â¤â€¢Ã Â¥Ë†Ã Â¤Å¸Ã Â¥â€¡Ã Â¤â€”Ã Â¤Â°Ã Â¥â‚¬",
-                  gu: "Ã Âªâ€¢Ã Â«â€¡Ã ÂªÅ¸Ã Â«â€¡Ã Âªâ€”Ã ÂªÂ°Ã Â«â‚¬",
+                  hi: "ÃƒÂ Ã‚Â¤Ã¢â‚¬Â¢ÃƒÂ Ã‚Â¥Ã‹â€ ÃƒÂ Ã‚Â¤Ã…Â¸ÃƒÂ Ã‚Â¥Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã¢â‚¬â€ÃƒÂ Ã‚Â¤Ã‚Â°ÃƒÂ Ã‚Â¥Ã¢â€šÂ¬",
+                  gu: "ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¢ÃƒÂ Ã‚Â«Ã¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ…Â¸ÃƒÂ Ã‚Â«Ã¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ¢â‚¬â€ÃƒÂ Ã‚ÂªÃ‚Â°ÃƒÂ Ã‚Â«Ã¢â€šÂ¬",
                 })}
               </p>
               <h3 className="mt-3 text-xl font-semibold tracking-tight">
@@ -68,90 +68,96 @@ export function CategoryCard({
               </h3>
             </div>
             <div className="rounded-full bg-background/80 px-3 py-1 text-xs font-semibold text-foreground/70">
-              {sizes.length} {pick(language, { en: "sizes", hi: "Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼", gu: "Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ" })}
+              {sizes.length} {pick(language, { en: "sizes", hi: "ÃƒÂ Ã‚Â¤Ã‚Â¸ÃƒÂ Ã‚Â¤Ã‚Â¾ÃƒÂ Ã‚Â¤Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã…â€œÃƒÂ Ã‚Â¤Ã‚Â¼", gu: "ÃƒÂ Ã‚ÂªÃ‚Â¸ÃƒÂ Ã‚ÂªÃ‚Â¾ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ‚Â" })}
             </div>
           </div>
 
           <Link
             href={detailHref}
-            className="relative mx-2 mt-5 block aspect-[11/10] w-auto overflow-hidden rounded-[22px] bg-white/94 p-2 shadow-sm ring-1 ring-border/40 transition hover:shadow-md dark:bg-white"
+            className="surface-media-frame relative mx-2 mt-5 block aspect-[11/10] w-auto overflow-hidden rounded-[22px] p-2 shadow-sm ring-1 ring-border/40 transition hover:shadow-md"
           >
             <Image
               src={imageSource}
               alt={getCategoryLabel(language, categoryKey)}
               fill
-              className="scale-[1.18] object-contain p-2 transition duration-300 group-hover:scale-[1.14]"
+              className="object-contain object-center p-4 transition duration-300 group-hover:scale-[1.03]"
               sizes="(max-width: 768px) 92vw, 520px"
               priority={false}
             />
           </Link>
         </div>
 
-        <div className="p-6">
+        <div className="flex flex-1 flex-col p-6">
           <p className="text-sm leading-relaxed text-foreground/72">
             {getCategoryDescription(language, categoryKey, description)}
           </p>
 
-          <div className="mt-5 rounded-[20px] border border-border bg-background/72 p-4">
-            <PriceStack retailPrice={retailPrice} wholesalePrice={wholesalePrice} language={language} />
-            <p className="mt-2 text-xs text-foreground/60">
-              {selectedVariant?.size
-                ? `${pick(language, {
-                  en: "Selected size",
-                  hi: "Ã Â¤Å¡Ã Â¤Â¯Ã Â¤Â¨Ã Â¤Â¿Ã Â¤Â¤ Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼",
-                  gu: "Ã ÂªÂªÃ ÂªÂ¸Ã Âªâ€šÃ ÂªÂ¦ Ã Âªâ€¢Ã ÂªÂ°Ã Â«â€¡Ã ÂªÂ² Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ",
-                })}: ${selectedVariant.size}`
-                : pick(language, {
-                  en: "Tap a size below",
-                  hi: "Ã Â¤Â¨Ã Â¥â‚¬Ã Â¤Å¡Ã Â¥â€¡ Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼ Ã Â¤Å¸Ã Â¥Ë†Ã Â¤Âª Ã Â¤â€¢Ã Â¤Â°Ã Â¥â€¡Ã Â¤â€š",
-                  gu: "Ã ÂªÂ¨Ã Â«â‚¬Ã ÂªÅ¡Ã Â«â€¡ Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ Ã ÂªÅ¸Ã Â«â€¡Ã ÂªÂª Ã Âªâ€¢Ã ÂªÂ°Ã Â«â€¹",
-                })}
-            </p>
-          </div>
+          <div className="mt-auto pt-5">
+            <div className="surface-inset rounded-[20px] border border-border p-4">
+              <PriceStack retailPrice={retailPrice} wholesalePrice={wholesalePrice} language={language} />
+              <p className="mt-2 text-xs text-foreground/60">
+                {selectedVariant?.size
+                  ? `${pick(language, {
+                    en: "Selected size",
+                    hi: "ÃƒÂ Ã‚Â¤Ã…Â¡ÃƒÂ Ã‚Â¤Ã‚Â¯ÃƒÂ Ã‚Â¤Ã‚Â¨ÃƒÂ Ã‚Â¤Ã‚Â¿ÃƒÂ Ã‚Â¤Ã‚Â¤ ÃƒÂ Ã‚Â¤Ã‚Â¸ÃƒÂ Ã‚Â¤Ã‚Â¾ÃƒÂ Ã‚Â¤Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã…â€œÃƒÂ Ã‚Â¤Ã‚Â¼",
+                    gu: "ÃƒÂ Ã‚ÂªÃ‚ÂªÃƒÂ Ã‚ÂªÃ‚Â¸ÃƒÂ Ã‚ÂªÃ¢â‚¬Å¡ÃƒÂ Ã‚ÂªÃ‚Â¦ ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¢ÃƒÂ Ã‚ÂªÃ‚Â°ÃƒÂ Ã‚Â«Ã¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ‚Â² ÃƒÂ Ã‚ÂªÃ‚Â¸ÃƒÂ Ã‚ÂªÃ‚Â¾ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ‚Â",
+                  })}: ${selectedVariant.size}`
+                  : pick(language, {
+                    en: "Tap a size below",
+                    hi: "ÃƒÂ Ã‚Â¤Ã‚Â¨ÃƒÂ Ã‚Â¥Ã¢â€šÂ¬ÃƒÂ Ã‚Â¤Ã…Â¡ÃƒÂ Ã‚Â¥Ã¢â‚¬Â¡ ÃƒÂ Ã‚Â¤Ã‚Â¸ÃƒÂ Ã‚Â¤Ã‚Â¾ÃƒÂ Ã‚Â¤Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã…â€œÃƒÂ Ã‚Â¤Ã‚Â¼ ÃƒÂ Ã‚Â¤Ã…Â¸ÃƒÂ Ã‚Â¥Ã‹â€ ÃƒÂ Ã‚Â¤Ã‚Âª ÃƒÂ Ã‚Â¤Ã¢â‚¬Â¢ÃƒÂ Ã‚Â¤Ã‚Â°ÃƒÂ Ã‚Â¥Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã¢â‚¬Å¡",
+                    gu: "ÃƒÂ Ã‚ÂªÃ‚Â¨ÃƒÂ Ã‚Â«Ã¢â€šÂ¬ÃƒÂ Ã‚ÂªÃ…Â¡ÃƒÂ Ã‚Â«Ã¢â‚¬Â¡ ÃƒÂ Ã‚ÂªÃ‚Â¸ÃƒÂ Ã‚ÂªÃ‚Â¾ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ‚Â ÃƒÂ Ã‚ÂªÃ…Â¸ÃƒÂ Ã‚Â«Ã¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ‚Âª ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¢ÃƒÂ Ã‚ÂªÃ‚Â°ÃƒÂ Ã‚Â«Ã¢â‚¬Â¹",
+                  })}
+              </p>
+            </div>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {selectedProduct
-              ? selectedProduct.variants.map((variant) => {
-                const active = variant.id === selectedVariant?.id;
-                return (
-                  <button
-                    key={variant.id}
-                    type="button"
-                    onClick={() => setVariantId(variant.id)}
-                    className={cn(
-                      "rounded-full border px-3 py-1.5 text-xs font-semibold transition",
-                      active
-                        ? "border-primary bg-primary/12 text-primary"
-                        : "border-border bg-background/70 text-foreground/72 hover:bg-muted",
-                    )}
-                    aria-pressed={active}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {selectedProduct
+                ? selectedProduct.variants.map((variant) => {
+                  const active = variant.id === selectedVariant?.id;
+                  return (
+                    <button
+                      key={variant.id}
+                      type="button"
+                      onClick={() => setVariantId(variant.id)}
+                      className={cn(
+                        "rounded-full border px-3 py-1.5 text-xs font-semibold transition",
+                        active
+                          ? "border-primary bg-primary/12 text-primary"
+                          : "border-border bg-background/70 text-foreground/72 hover:bg-muted",
+                      )}
+                      aria-pressed={active}
+                    >
+                      {variant.size}
+                    </button>
+                  );
+                })
+                : sizes.map((size) => (
+                  <span
+                    key={size}
+                    className="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold text-foreground/72"
                   >
-                    {variant.size}
-                  </button>
-                );
-              })
-              : sizes.map((size) => (
-                <span
-                  key={size}
-                  className="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold text-foreground/72"
-                >
-                  {size}
-                </span>
-              ))}
-          </div>
+                    {size}
+                  </span>
+                ))}
+            </div>
 
-          <div className="mt-6">
-            <Button href={detailHref} variant="outline" size="sm">
-              {pick(language, {
-                en: "View Details",
-                hi: "Ã Â¤ÂµÃ Â¤Â¿Ã Â¤ÂµÃ Â¤Â°Ã Â¤Â£ Ã Â¤Â¦Ã Â¥â€¡Ã Â¤â€“Ã Â¥â€¡Ã Â¤â€š",
-                gu: "Ã ÂªÂµÃ ÂªÂ¿Ã Âªâ€”Ã ÂªÂ¤ Ã ÂªÅ“Ã Â«ÂÃ Âªâ€œ",
-              })}{" "}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            <div className="mt-6">
+              <Button href={detailHref} variant="outline" size="sm">
+                {pick(language, {
+                  en: "View Details",
+                  hi: "ÃƒÂ Ã‚Â¤Ã‚ÂµÃƒÂ Ã‚Â¤Ã‚Â¿ÃƒÂ Ã‚Â¤Ã‚ÂµÃƒÂ Ã‚Â¤Ã‚Â°ÃƒÂ Ã‚Â¤Ã‚Â£ ÃƒÂ Ã‚Â¤Ã‚Â¦ÃƒÂ Ã‚Â¥Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã¢â‚¬â€œÃƒÂ Ã‚Â¥Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã¢â‚¬Å¡",
+                  gu: "ÃƒÂ Ã‚ÂªÃ‚ÂµÃƒÂ Ã‚ÂªÃ‚Â¿ÃƒÂ Ã‚ÂªÃ¢â‚¬â€ÃƒÂ Ã‚ÂªÃ‚Â¤ ÃƒÂ Ã‚ÂªÃ…â€œÃƒÂ Ã‚Â«Ã‚ÂÃƒÂ Ã‚ÂªÃ¢â‚¬Å“",
+                })}{" "}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
     </motion.div>
   );
 }
+
+
+
+

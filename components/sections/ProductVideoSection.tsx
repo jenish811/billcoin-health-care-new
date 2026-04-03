@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -383,11 +383,11 @@ export function ProductVideoSection() {
   }, []);
 
   return (
-    <section className="section-y bg-muted/35">
-      <Container className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+    <section className="section-y">
+      <Container className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-start lg:[&>*]:min-w-0">
         <div>
           <Card className="overflow-hidden">
-            <div className="relative overflow-hidden rounded-[30px] bg-slate-950">
+            <div className="surface-video relative overflow-hidden rounded-[30px]">
               {videoSrc ? (
                 <video
                   key={videoSrc}
@@ -410,7 +410,7 @@ export function ProductVideoSection() {
                     className="object-cover opacity-80"
                     sizes="(max-width: 1024px) 100vw, 52vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/10" />
+                  <div className="surface-video-fade absolute inset-0" />
                   <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-white">
                     <div className="max-w-sm">
                       <CirclePlay className="mx-auto h-12 w-12 text-primary" />
@@ -430,7 +430,7 @@ export function ProductVideoSection() {
                 })}
               </div>
 
-              <div className="border-t border-white/10 bg-slate-950/92 p-5 text-white">
+              <div className="surface-video-footer border-t border-white/10 p-5 text-white">
                 <div className="flex items-start gap-3">
                   <CirclePlay className="mt-0.5 h-5 w-5 text-primary" />
                   <div>
@@ -545,3 +545,8 @@ export function ProductVideoSection() {
     </section>
   );
 }
+
+
+
+
+

@@ -83,8 +83,7 @@ export function HomePageContent() {
   return (
     <div>
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-soft opacity-45" />
-        <Container className="section-y relative grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+        <Container className="section-y relative grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-start lg:[&>*]:min-w-0">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -169,7 +168,7 @@ export function HomePageContent() {
 
           <div className="surface-panel rounded-[36px] p-5 sm:p-6">
             <div className="grid gap-4">
-              <div className="group relative overflow-hidden rounded-[30px] bg-gradient-to-br from-primary/12 via-background/95 to-secondary/10 p-5 shadow-sm ring-1 ring-border/40">
+              <div className="surface-showcase group relative overflow-hidden rounded-[30px] p-5 shadow-sm ring-1 ring-border/40">
                 <div className="absolute inset-0 opacity-60 [background:radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_34%)]" />
                 <div className="relative flex justify-end">
                   <div className="rounded-full bg-primary/12 px-3 py-1 text-xs font-semibold text-primary">
@@ -180,17 +179,17 @@ export function HomePageContent() {
                     })}
                   </div>
                 </div>
-                <div className="relative mx-2 mt-4 aspect-[11/10] overflow-hidden rounded-[22px] bg-white/94 p-2 shadow-sm ring-1 ring-border/40 dark:bg-white">
+                <div className="surface-media-frame relative mx-2 mt-4 aspect-[11/10] overflow-hidden rounded-[22px] p-2 shadow-sm ring-1 ring-border/40">
                   <Image
                     src={leadProduct?.variants[0]?.image ?? "/images/hero-cleaning.png"}
                     alt={leadProduct?.title ?? "Billcoin product"}
                     fill
-                    className="scale-[1.18] object-contain p-2 transition duration-300 group-hover:scale-[1.14]"
+                    className="object-contain object-center p-4 transition duration-300 group-hover:scale-[1.03]"
                     sizes="(max-width: 768px) 92vw, (max-width: 1024px) 100vw, 42vw"
                     priority
                   />
                 </div>
-                <div className="relative mt-4 rounded-[24px] border border-border bg-background/72 p-4">
+                <div className="surface-inset relative mt-4 rounded-[24px] border border-border p-4">
                   <PriceStack
                     retailPrice={leadProduct?.priceFrom ?? 55}
                     wholesalePrice={leadWholesalePrice}
@@ -228,7 +227,7 @@ export function HomePageContent() {
       </section>
 
       <section className="pb-8">
-        <Container>
+        <Container className="relative">
           <div className="grid gap-4 md:grid-cols-3">
             {[
               {
@@ -275,7 +274,7 @@ export function HomePageContent() {
               return (
                 <Card key={item.title.en} className="p-6">
                   <div className="flex items-start gap-4">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/12 ring-1 ring-primary/15">
+                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/12 ring-1 ring-primary/15">
                       <Icon className="h-5 w-5 text-primary" />
                     </span>
                     <div>
@@ -293,7 +292,7 @@ export function HomePageContent() {
       </section>
 
       <section className="section-y">
-        <Container>
+        <Container className="relative">
           <SectionHeading
             eyebrow={pick(language, {
               en: "Best Sellers",
@@ -321,8 +320,8 @@ export function HomePageContent() {
         </Container>
       </section>
 
-      <section className="section-y bg-muted/35">
-        <Container>
+      <section className="section-y">
+        <Container className="relative">
           <SectionHeading
             eyebrow={pick(language, {
               en: "Categories",
@@ -342,25 +341,36 @@ export function HomePageContent() {
             className="mb-10"
           />
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {productCategories.map((category) => (
-              <CategoryCard
-                key={category.category}
-                title={category.title}
-                description={category.description}
-                image={category.image}
-                sizes={category.sizes}
-                category={category.category}
-              />
-            ))}
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-6">
+            {productCategories.map((category, index) => {
+              const remainder = productCategories.length % 3;
+              const xlSpanClass =
+                remainder === 1 && index === productCategories.length - 1
+                  ? "xl:col-span-6"
+                  : remainder === 2 && index >= productCategories.length - 2
+                    ? "xl:col-span-3"
+                    : "xl:col-span-2";
+
+              return (
+                <div key={category.category} className={xlSpanClass}>
+                  <CategoryCard
+                    title={category.title}
+                    description={category.description}
+                    image={category.image}
+                    sizes={category.sizes}
+                    category={category.category}
+                  />
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
 
       <section className="section-y">
-        <Container className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <Container className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start lg:[&>*]:min-w-0">
           <div className="surface-panel rounded-[36px] p-5">
-            <div className="relative overflow-hidden rounded-[30px] bg-slate-950">
+            <div className="surface-video relative overflow-hidden rounded-[30px]">
               <Image
                 src="/images/about-brand.png"
                 alt="Billcoin manufacturing story"
@@ -368,7 +378,7 @@ export function HomePageContent() {
                 height={900}
                 className="h-full w-full object-cover opacity-75"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+              <div className="surface-video-fade absolute inset-0" />
               <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white/90">
                   <Video className="h-3.5 w-3.5" />
@@ -459,10 +469,10 @@ export function HomePageContent() {
         </Container>
       </section>
 
-      <section className="section-y bg-muted/35">
-        <Container>
+      <section className="section-y">
+        <Container className="relative">
           <Card className="overflow-hidden p-8 sm:p-10">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-start">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/80">
                   {pick(language, {
@@ -510,6 +520,22 @@ export function HomePageContent() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

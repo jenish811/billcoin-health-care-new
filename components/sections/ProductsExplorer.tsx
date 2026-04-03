@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Search } from "lucide-react";
@@ -37,6 +37,7 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
   }, [category, query]);
 
   const tabs: Tab[] = [allLabel, ...productCategoryOrder];
+  const remainder = filtered.length % 3;
 
   return (
     <div className="grid gap-8">
@@ -125,11 +126,18 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
         })}
       </div>
 
-      <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-6">
         <AnimatePresence mode="popLayout" initial={false}>
-          {filtered.map((product) => (
+          {filtered.map((product, index) => (
             <motion.div
               key={product.id}
+              className={
+                remainder === 1 && index === filtered.length - 1
+                  ? "xl:col-span-6"
+                  : remainder === 2 && index >= filtered.length - 2
+                    ? "xl:col-span-3"
+                    : "xl:col-span-2"
+              }
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
@@ -143,3 +151,6 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
     </div>
   );
 }
+
+
+

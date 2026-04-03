@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Store } from "lucide-react";
 import type { Product, ProductVariant } from "@/data/products";
@@ -48,7 +48,7 @@ export function WholesalePricingSection({
 
   return (
     <Card className="mt-6 overflow-hidden">
-      <div className="border-b border-border bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 p-6">
+      <div className="surface-accent border-b border-border p-6">
         <div className="flex items-start gap-3">
           <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12 ring-1 ring-primary/15">
             <Store className="h-5 w-5 text-primary" />
@@ -80,7 +80,7 @@ export function WholesalePricingSection({
       </div>
 
       <div className="grid gap-4 p-6 md:grid-cols-2">
-        <div className="rounded-[24px] border border-border bg-background/72 p-5">
+        <div className="surface-inset rounded-[24px] border border-border p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/52">
             {pick(language, {
               en: "Selected Size",
@@ -149,3 +149,5 @@ export function WholesalePricingSection({
     </Card>
   );
 }
+
+

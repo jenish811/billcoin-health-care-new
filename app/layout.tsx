@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import {
   Noto_Sans_Devanagari,
   Noto_Sans_Gujarati,
@@ -35,7 +35,7 @@ const appGujarati = Noto_Sans_Gujarati({
 export const metadata: Metadata = {
   title: {
     default: "Billcoin Health Care",
-    template: "%s · Billcoin Health Care",
+    template: "%s - Billcoin Health Care",
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -89,3 +89,4 @@ export default function RootLayout({
     </html>
   );
 }
+

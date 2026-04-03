@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Suspense } from "react";
 import { Globe, Mail, MapPin, Phone, Store } from "lucide-react";
@@ -18,7 +18,7 @@ function ContactPageContent() {
 
   return (
     <section className="section-y">
-      <Container className="grid gap-10 lg:grid-cols-12">
+      <Container className="grid gap-10 lg:grid-cols-12 lg:[&>*]:min-w-0">
         <div className="lg:col-span-5">
           <SectionHeading
             eyebrow={pick(language, {
@@ -92,7 +92,7 @@ function ContactPageContent() {
 
           <Card className="mt-8 overflow-hidden">
             <div className="relative p-6">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10" />
+              <div className="surface-accent absolute inset-0" />
               <div className="relative flex items-start gap-3">
                 <Store className="mt-0.5 h-5 w-5 text-primary" />
                 <div>
@@ -178,3 +178,5 @@ export default function ContactPage() {
     </Suspense>
   );
 }
+
+

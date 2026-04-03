@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Download } from "lucide-react";
 import { BrochureGrid } from "@/components/sections/BrochureGrid";
@@ -48,7 +48,7 @@ export default function BrochurePage() {
 
         <Card className="overflow-hidden">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10" />
+            <div className="surface-accent absolute inset-0" />
             <div className="relative">
               <iframe
                 title="Billcoin Health Care brochure"
@@ -82,3 +82,4 @@ export default function BrochurePage() {
     </section>
   );
 }
+

@@ -63,7 +63,7 @@ export function ProductDetailsClient({
             gu: "àª•àª¿àª‚àª®àª¤ àª®àª¾àªŸà«‡ àª¸àª‚àªªàª°à«àª• àª•àª°à«‹",
           });
 
-  const pricePillLabel = variant?.size ? `${variant.size} â€¢ ${selectedPriceLabel}` : selectedPriceLabel;
+  const pricePillLabel = variant?.size ? `${variant.size} - ${selectedPriceLabel}` : selectedPriceLabel;
 
   const whatsAppHref = useMemo(() => {
     const whatsAppText = [
@@ -97,7 +97,7 @@ export function ProductDetailsClient({
                     src={variant?.image ?? product.variants[0]?.image ?? "/images/handwash-500ml.jpeg"}
                     alt={product.title}
                     fill
-                    className="rounded-[24px] object-contain scale-[1.18]"
+                    className="rounded-[24px] object-contain object-center p-4"
                     sizes="(max-width: 1024px) 92vw, 680px"
                     priority
                   />
@@ -247,5 +247,7 @@ export function ProductDetailsClient({
     </div>
   );
 }
+
+
 
 

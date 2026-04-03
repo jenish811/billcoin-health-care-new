@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
@@ -11,8 +11,8 @@ export function Footer() {
   const { language } = useAppPreferences();
 
   return (
-    <footer className="border-t border-border bg-gradient-to-b from-transparent via-muted/40 to-muted/70">
-      <Container className="grid gap-8 py-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <footer className="bg-transparent">
+      <Container className="grid gap-8 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:[&>*]:min-w-0">
         <div>
           <Logo />
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-foreground/72">
@@ -69,7 +69,7 @@ export function Footer() {
         </div>
       </Container>
 
-      <div className="border-t border-border">
+      <div>
         <Container className="flex flex-col gap-2 py-5 text-sm text-foreground/58 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {siteConfig.name}
@@ -86,3 +86,4 @@ export function Footer() {
     </footer>
   );
 }
+
