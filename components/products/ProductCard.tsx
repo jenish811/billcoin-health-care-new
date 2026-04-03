@@ -6,10 +6,10 @@ import { ChevronRight, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Product } from "@/data/products";
 import { useAppPreferences } from "@/components/providers/AppPreferencesProvider";
+import { PriceStack } from "@/components/products/PriceStack";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { getCategoryLabel } from "@/lib/catalog-localization";
-import { formatINR } from "@/lib/format";
 import { pick } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -28,17 +28,8 @@ export function ProductCard({
   }, [product.variants, variantId]);
 
   const benefits = useMemo(() => product.benefits.slice(0, compact ? 2 : 3), [product, compact]);
-
-  const priceLabel =
-    variant?.price != null
-      ? formatINR(variant.price, language)
-      : product.priceFrom > 0
-        ? formatINR(product.priceFrom, language)
-        : pick(language, {
-            en: "Ask for price",
-            hi: "कीमत पूछें",
-            gu: "કિંમત પૂછો",
-          });
+  const retailPrice = variant?.price ?? (product.priceFrom > 0 ? product.priceFrom : undefined);
+  const wholesalePrice = variant?.wholesalePrice;
 
   return (
     <Card className="group h-full overflow-hidden">
@@ -53,8 +44,8 @@ export function ProductCard({
               <Sparkles className="h-3.5 w-3.5" />
               {pick(language, {
                 en: "Featured",
-                hi: "फीचर्ड",
-                gu: "ફીચર્ડ",
+                hi: "à¤«à¥€à¤šà¤°à¥à¤¡",
+                gu: "àª«à«€àªšàª°à«àª¡",
               })}
             </Badge>
           ) : null}
@@ -65,7 +56,7 @@ export function ProductCard({
             src={variant?.image ?? "/images/handwash-500ml.jpeg"}
             alt={product.title}
             fill
-            className="object-contain p-2 transition duration-300 group-hover:scale-[1.14] scale-[1.18]"
+            className="scale-[1.18] object-contain p-2 transition duration-300 group-hover:scale-[1.14]"
             sizes="(max-width: 768px) 92vw, 520px"
           />
         </div>
@@ -77,9 +68,7 @@ export function ProductCard({
           <p className="mt-1 text-sm font-semibold text-primary/90">{product.tagline}</p>
         ) : null}
 
-        <p className="mt-3 text-sm leading-relaxed text-foreground/72">
-          {product.description}
-        </p>
+        <p className="mt-3 text-sm leading-relaxed text-foreground/72">{product.description}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {product.variants.map((v) => {
@@ -115,25 +104,23 @@ export function ProductCard({
         <div className="mt-6 rounded-[24px] border border-border bg-background/72 p-4">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/52">
-                {pick(language, {
-                  en: "Visible Price",
-                  hi: "स्पष्ट कीमत",
-                  gu: "સ્પષ્ટ કિંમત",
-                })}
-              </p>
-              <p className="mt-2 text-2xl font-semibold tracking-tight">{priceLabel}</p>
-              <p className="mt-1 text-xs text-foreground/60">
+              <PriceStack
+                retailPrice={retailPrice}
+                wholesalePrice={wholesalePrice}
+                language={language}
+                compact={compact}
+              />
+              <p className="mt-2 text-xs text-foreground/60">
                 {variant?.size
                   ? `${pick(language, {
                       en: "Selected size",
-                      hi: "चयनित साइज़",
-                      gu: "પસંદ કરેલ સાઇઝ",
+                      hi: "à¤šà¤¯à¤¨à¤¿à¤¤ à¤¸à¤¾à¤‡à¤œà¤¼",
+                      gu: "àªªàª¸àª‚àª¦ àª•àª°à«‡àª² àª¸àª¾àª‡àª",
                     })}: ${variant.size}`
                   : pick(language, {
                       en: "Starting price",
-                      hi: "शुरुआती कीमत",
-                      gu: "શરૂઆતની કિંમત",
+                      hi: "à¤¶à¥à¤°à¥à¤†à¤¤à¥€ à¤•à¥€à¤®à¤¤",
+                      gu: "àª¶àª°à«‚àª†àª¤àª¨à«€ àª•àª¿àª‚àª®àª¤",
                     })}
               </p>
             </div>
@@ -145,8 +132,8 @@ export function ProductCard({
             >
               {pick(language, {
                 en: "View",
-                hi: "देखें",
-                gu: "જુઓ",
+                hi: "à¤¦à¥‡à¤–à¥‡à¤‚",
+                gu: "àªœà«àª“",
               })}
               <ChevronRight className="h-4 w-4" />
             </Link>

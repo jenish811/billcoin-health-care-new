@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { CountUp } from "@/components/CountUp";
 import { CategoryCard } from "@/components/products/CategoryCard";
+import { PriceStack } from "@/components/products/PriceStack";
 import { ProductCard } from "@/components/products/ProductCard";
 import { useAppPreferences } from "@/components/providers/AppPreferencesProvider";
 import { Button } from "@/components/ui/Button";
@@ -20,7 +21,6 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { productCategories, products } from "@/data/products";
 import { siteConfig } from "@/data/site";
-import { formatINR } from "@/lib/format";
 import { pick } from "@/lib/i18n";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 
@@ -59,6 +59,17 @@ export function HomePageContent() {
   const featuredProducts = products.filter((product) => product.featured).slice(0, 6);
   const heroProducts = featuredProducts.slice(0, 3);
   const leadProduct = heroProducts[0];
+
+  const getWholesaleFrom = (product: (typeof products)[number] | undefined) =>
+    product?.variants.reduce<number | undefined>((lowest, entry) => {
+      if (entry.wholesalePrice == null) {
+        return lowest;
+      }
+
+      return lowest == null ? entry.wholesalePrice : Math.min(lowest, entry.wholesalePrice);
+    }, undefined);
+
+  const leadWholesalePrice = getWholesaleFrom(leadProduct);
 
   const whatsAppHref = createWhatsAppLink({
     phone: siteConfig.contact.phone,
@@ -180,16 +191,11 @@ export function HomePageContent() {
                   />
                 </div>
                 <div className="relative mt-4 rounded-[24px] border border-border bg-background/72 p-4">
-                  <p className="text-sm font-semibold text-foreground/65">
-                    {pick(language, {
-                      en: "Starting from",
-                      hi: "à¤¶à¥à¤°à¥à¤†à¤¤",
-                      gu: "àª¶àª°à«‚àª†àª¤",
-                    })}
-                  </p>
-                  <p className="mt-1 text-3xl font-semibold tracking-tight">
-                    {leadProduct ? formatINR(leadProduct.priceFrom, language) : formatINR(55, language)}
-                  </p>
+                  <PriceStack
+                    retailPrice={leadProduct?.priceFrom ?? 55}
+                    wholesalePrice={leadWholesalePrice}
+                    language={language}
+                  />
                   <p className="mt-2 text-sm text-foreground/72">{leadProduct?.title}</p>
                 </div>
               </div>
@@ -198,14 +204,19 @@ export function HomePageContent() {
                 {heroProducts.map((product) => (
                   <Card key={product.id} className="p-4">
                     <p className="text-sm font-semibold">{product.title}</p>
-                    <p className="mt-2 text-2xl font-semibold tracking-tight">
-                      {formatINR(product.priceFrom, language)}
-                    </p>
-                    <p className="mt-1 text-xs text-foreground/60">
+                    <div className="mt-3">
+                      <PriceStack
+                        retailPrice={product.priceFrom}
+                        wholesalePrice={getWholesaleFrom(product)}
+                        language={language}
+                        compact
+                      />
+                    </div>
+                    <p className="mt-2 text-xs text-foreground/60">
                       {pick(language, {
-                        en: "Visible home pricing",
-                        hi: "à¤¹à¥‹à¤® à¤ªà¤° à¤•à¥€à¤®à¤¤ à¤¦à¤¿à¤– à¤°à¤¹à¥€ à¤¹à¥ˆ",
-                        gu: "àª¹à«‹àª® àªªàª° àª•àª¿àª‚àª®àª¤ àª¦à«‡àª–àª¾àª¯ àª›à«‡",
+                        en: "Retail and wholesale shown together",
+                        hi: "Retail and wholesale shown together",
+                        gu: "Retail and wholesale shown together",
                       })}
                     </p>
                   </Card>
@@ -499,4 +510,7 @@ export function HomePageContent() {
     </div>
   );
 }
+
+
+
 

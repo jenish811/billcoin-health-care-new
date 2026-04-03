@@ -20,6 +20,10 @@ export type ProductVariant = {
    * Optional per-variant price (INR). If omitted, UI falls back to Product.priceFrom.
    */
   price?: number;
+  /**
+   * Optional wholesale/dealer price (INR) from the price list D.PRICE column.
+   */
+  wholesalePrice?: number;
 };
 
 export type Product = {
@@ -119,9 +123,9 @@ export const products: Product[] = [
     ],
     priceFrom: 55,
     variants: [
-      { id: "200ml", size: "200ml", image: "/images/handwash-200ml.jpeg", price: 55 },
-      { id: "500ml", size: "500ml", image: "/images/handwash-500ml.jpeg", price: 80 },
-      { id: "5l", size: "5L", image: "/images/handwash-5l.jpeg", price: 600 },
+      { id: "200ml", size: "200ml", image: "/images/handwash-200ml.jpeg", price: 55, wholesalePrice: 45 },
+      { id: "500ml", size: "500ml", image: "/images/handwash-500ml.jpeg", price: 80, wholesalePrice: 65 },
+      { id: "5l", size: "5L", image: "/images/handwash-5l.jpeg", price: 600, wholesalePrice: 500 },
     ],
     featured: true,
   },
@@ -134,9 +138,9 @@ export const products: Product[] = [
     benefits: ["Powerful grease cutting", "Sparkling clean dishes", "Residue free"],
     priceFrom: 30,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/dishwash-500ml.jpeg", price: 30 },
-      { id: "1l", size: "1L", image: "/images/dishwash-1.jpeg", price: 42 },
-      { id: "4_5l", size: "4.5L", image: "/images/dishwash-4_5l.jpeg", price: 170 },
+      { id: "500ml", size: "500ml", image: "/images/dishwash-500ml.jpeg", price: 30, wholesalePrice: 25 },
+      { id: "1l", size: "1L", image: "/images/dishwash-1.jpeg", price: 42, wholesalePrice: 35 },
+      { id: "4_5l", size: "4.5L", image: "/images/dishwash-4_5l.jpeg", price: 170, wholesalePrice: 140 },
     ],
     featured: true,
   },
@@ -154,8 +158,8 @@ export const products: Product[] = [
     ],
     priceFrom: 90,
     variants: [
-      { id: "1l", size: "1L", image: "/images/detergent-1l.jpeg", price: 90 },
-      { id: "5l", size: "5L", image: "/images/detergent-5l.jpeg", price: 350 },
+      { id: "1l", size: "1L", image: "/images/detergent-1l.jpeg", price: 90, wholesalePrice: 75 },
+      { id: "5l", size: "5L", image: "/images/detergent-5l.jpeg", price: 350, wholesalePrice: 260 },
     ],
     featured: true,
   },
@@ -178,10 +182,11 @@ export const products: Product[] = [
         size: "300ml",
         image: "/images/toilet-cleaner-500ml.jpeg",
         price: 45,
+        wholesalePrice: 35,
       },
-      { id: "500ml", size: "500ml", image: "/images/toilet-cleaner-500ml.jpeg", price: 60 },
-      { id: "1l", size: "1L", image: "/images/toilet-cleaner-1.jpeg", price: 85 },
-      { id: "5l", size: "5L", image: "/images/toilet-cleaner-5l.jpeg", price: 420 },
+      { id: "500ml", size: "500ml", image: "/images/toilet-cleaner-500ml.jpeg", price: 60, wholesalePrice: 50 },
+      { id: "1l", size: "1L", image: "/images/toilet-cleaner-1.jpeg", price: 85, wholesalePrice: 70 },
+      { id: "5l", size: "5L", image: "/images/toilet-cleaner-5l.jpeg", price: 420, wholesalePrice: 350 },
     ],
     featured: true,
   },
@@ -199,8 +204,8 @@ export const products: Product[] = [
     ],
     priceFrom: 80,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/glass-cleaner-500ml.jpeg", price: 80 },
-      { id: "5l", size: "5L", image: "/images/glass-cleaner-1.jpeg", price: 470 },
+      { id: "500ml", size: "500ml", image: "/images/glass-cleaner-500ml.jpeg", price: 80, wholesalePrice: 70 },
+      { id: "5l", size: "5L", image: "/images/glass-cleaner-1.jpeg", price: 470, wholesalePrice: 400 },
     ],
     featured: true,
   },
@@ -218,9 +223,9 @@ export const products: Product[] = [
     ],
     priceFrom: 60,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-rose.jpeg", price: 60 },
-      { id: "1l", size: "1L", image: "/images/surface-cleaner-rose.jpeg", price: 90 },
-      { id: "5l", size: "5L", image: "/images/surface-cleaner-rose.jpeg", price: 400 },
+      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-rose.jpeg", price: 60, wholesalePrice: 50 },
+      { id: "1l", size: "1L", image: "/images/surface-cleaner-rose.jpeg", price: 90, wholesalePrice: 80 },
+      { id: "5l", size: "5L", image: "/images/surface-cleaner-rose.jpeg", price: 400, wholesalePrice: 350 },
     ],
   },
   {
@@ -236,9 +241,9 @@ export const products: Product[] = [
     ],
     priceFrom: 60,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-lemon-500ml.jpeg", price: 60 },
-      { id: "1l", size: "1L", image: "/images/surface-cleaner-lemon-1l.jpeg", price: 90 },
-      { id: "5l", size: "5L", image: "/images/surface-cleaner-lemon.jpeg", price: 400 },
+      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-lemon-500ml.jpeg", price: 60, wholesalePrice: 50 },
+      { id: "1l", size: "1L", image: "/images/surface-cleaner-lemon-1l.jpeg", price: 90, wholesalePrice: 80 },
+      { id: "5l", size: "5L", image: "/images/surface-cleaner-lemon.jpeg", price: 400, wholesalePrice: 350 },
     ],
   },
   {
@@ -254,9 +259,9 @@ export const products: Product[] = [
     ],
     priceFrom: 60,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-lavender-500ml.jpeg", price: 60 },
-      { id: "1l", size: "1L", image: "/images/surface-cleaner-lavender-1l.jpeg", price: 90 },
-      { id: "5l", size: "5L", image: "/images/surface-cleaner-lavender.jpeg", price: 400 },
+      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-lavender-500ml.jpeg", price: 60, wholesalePrice: 50 },
+      { id: "1l", size: "1L", image: "/images/surface-cleaner-lavender-1l.jpeg", price: 90, wholesalePrice: 80 },
+      { id: "5l", size: "5L", image: "/images/surface-cleaner-lavender.jpeg", price: 400, wholesalePrice: 350 },
     ],
   },
   {
@@ -272,9 +277,9 @@ export const products: Product[] = [
     ],
     priceFrom: 60,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-jasmine-500ml.jpeg", price: 60 },
-      { id: "1l", size: "1L", image: "/images/surface-cleaner-jasmine-1l.jpeg", price: 90 },
-      { id: "5l", size: "5L", image: "/images/surface-cleaner-jasmine.jpeg", price: 400 },
+      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-jasmine-500ml.jpeg", price: 60, wholesalePrice: 50 },
+      { id: "1l", size: "1L", image: "/images/surface-cleaner-jasmine-1l.jpeg", price: 90, wholesalePrice: 80 },
+      { id: "5l", size: "5L", image: "/images/surface-cleaner-jasmine.jpeg", price: 400, wholesalePrice: 350 },
     ],
   },
   {

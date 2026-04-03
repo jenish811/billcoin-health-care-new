@@ -7,10 +7,10 @@ import { ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { products, type ProductCategory } from "@/data/products";
 import { useAppPreferences } from "@/components/providers/AppPreferencesProvider";
+import { PriceStack } from "@/components/products/PriceStack";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { getCategoryDescription, getCategoryLabel } from "@/lib/catalog-localization";
-import { formatINR } from "@/lib/format";
 import { pick } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -41,16 +41,9 @@ export function CategoryCard({
   );
 
   const imageSource = selectedVariant?.image ?? selectedProduct?.variants[0]?.image ?? image;
-  const priceLabel =
-    selectedVariant?.price != null
-      ? formatINR(selectedVariant.price, language)
-      : selectedProduct?.priceFrom
-        ? formatINR(selectedProduct.priceFrom, language)
-        : pick(language, {
-          en: "Ask for price",
-          hi: "à¤•à¥€à¤®à¤¤ à¤ªà¥‚à¤›à¥‡à¤‚",
-          gu: "àª•àª¿àª‚àª®àª¤ àªªà«‚àª›à«‹",
-        });
+  const retailPrice =
+    selectedVariant?.price ?? (selectedProduct?.priceFrom ? selectedProduct.priceFrom : undefined);
+  const wholesalePrice = selectedVariant?.wholesalePrice;
 
   const detailHref = selectedProduct
     ? `/products/${selectedProduct.id}?variant=${encodeURIComponent(selectedVariant?.id ?? selectedProduct.variants[0]?.id ?? "")}`
@@ -66,8 +59,8 @@ export function CategoryCard({
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">
                 {pick(language, {
                   en: "Category",
-                  hi: "à¤•à¥ˆà¤Ÿà¥‡à¤—à¤°à¥€",
-                  gu: "àª•à«‡àªŸà«‡àª—àª°à«€",
+                  hi: "Ã Â¤â€¢Ã Â¥Ë†Ã Â¤Å¸Ã Â¥â€¡Ã Â¤â€”Ã Â¤Â°Ã Â¥â‚¬",
+                  gu: "Ã Âªâ€¢Ã Â«â€¡Ã ÂªÅ¸Ã Â«â€¡Ã Âªâ€”Ã ÂªÂ°Ã Â«â‚¬",
                 })}
               </p>
               <h3 className="mt-3 text-xl font-semibold tracking-tight">
@@ -75,7 +68,7 @@ export function CategoryCard({
               </h3>
             </div>
             <div className="rounded-full bg-background/80 px-3 py-1 text-xs font-semibold text-foreground/70">
-              {sizes.length} {pick(language, { en: "sizes", hi: "à¤¸à¤¾à¤‡à¤œà¤¼", gu: "àª¸àª¾àª‡àª" })}
+              {sizes.length} {pick(language, { en: "sizes", hi: "Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼", gu: "Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ" })}
             </div>
           </div>
 
@@ -87,7 +80,7 @@ export function CategoryCard({
               src={imageSource}
               alt={getCategoryLabel(language, categoryKey)}
               fill
-              className="object-contain p-2 transition duration-300 group-hover:scale-[1.14] scale-[1.18]"
+              className="scale-[1.18] object-contain p-2 transition duration-300 group-hover:scale-[1.14]"
               sizes="(max-width: 768px) 92vw, 520px"
               priority={false}
             />
@@ -100,25 +93,18 @@ export function CategoryCard({
           </p>
 
           <div className="mt-5 rounded-[20px] border border-border bg-background/72 p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/52">
-              {pick(language, {
-                en: "Home Price",
-                hi: "à¤¹à¥‹à¤® à¤ªà¥à¤°à¤¾à¤‡à¤¸",
-                gu: "àª¹à«‹àª® àªªà«àª°àª¾àª‡àª¸",
-              })}
-            </p>
-            <p className="mt-2 text-2xl font-semibold tracking-tight">{priceLabel}</p>
-            <p className="mt-1 text-xs text-foreground/60">
+            <PriceStack retailPrice={retailPrice} wholesalePrice={wholesalePrice} language={language} />
+            <p className="mt-2 text-xs text-foreground/60">
               {selectedVariant?.size
                 ? `${pick(language, {
                   en: "Selected size",
-                  hi: "à¤šà¤¯à¤¨à¤¿à¤¤ à¤¸à¤¾à¤‡à¤œà¤¼",
-                  gu: "àªªàª¸àª‚àª¦ àª•àª°à«‡àª² àª¸àª¾àª‡àª",
+                  hi: "Ã Â¤Å¡Ã Â¤Â¯Ã Â¤Â¨Ã Â¤Â¿Ã Â¤Â¤ Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼",
+                  gu: "Ã ÂªÂªÃ ÂªÂ¸Ã Âªâ€šÃ ÂªÂ¦ Ã Âªâ€¢Ã ÂªÂ°Ã Â«â€¡Ã ÂªÂ² Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ",
                 })}: ${selectedVariant.size}`
                 : pick(language, {
                   en: "Tap a size below",
-                  hi: "à¤¨à¥€à¤šà¥‡ à¤¸à¤¾à¤‡à¤œà¤¼ à¤Ÿà¥ˆà¤ª à¤•à¤°à¥‡à¤‚",
-                  gu: "àª¨à«€àªšà«‡ àª¸àª¾àª‡àª àªŸà«‡àªª àª•àª°à«‹",
+                  hi: "Ã Â¤Â¨Ã Â¥â‚¬Ã Â¤Å¡Ã Â¥â€¡ Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼ Ã Â¤Å¸Ã Â¥Ë†Ã Â¤Âª Ã Â¤â€¢Ã Â¤Â°Ã Â¥â€¡Ã Â¤â€š",
+                  gu: "Ã ÂªÂ¨Ã Â«â‚¬Ã ÂªÅ¡Ã Â«â€¡ Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ Ã ÂªÅ¸Ã Â«â€¡Ã ÂªÂª Ã Âªâ€¢Ã ÂªÂ°Ã Â«â€¹",
                 })}
             </p>
           </div>
@@ -158,8 +144,8 @@ export function CategoryCard({
             <Button href={detailHref} variant="outline" size="sm">
               {pick(language, {
                 en: "View Details",
-                hi: "à¤µà¤¿à¤µà¤°à¤£ à¤¦à¥‡à¤–à¥‡à¤‚",
-                gu: "àªµàª¿àª—àª¤ àªœà«àª“",
+                hi: "Ã Â¤ÂµÃ Â¤Â¿Ã Â¤ÂµÃ Â¤Â°Ã Â¤Â£ Ã Â¤Â¦Ã Â¥â€¡Ã Â¤â€“Ã Â¥â€¡Ã Â¤â€š",
+                gu: "Ã ÂªÂµÃ ÂªÂ¿Ã Âªâ€”Ã ÂªÂ¤ Ã ÂªÅ“Ã Â«ÂÃ Âªâ€œ",
               })}{" "}
               <ArrowRight className="h-4 w-4" />
             </Button>
