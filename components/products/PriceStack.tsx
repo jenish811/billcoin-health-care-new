@@ -34,8 +34,8 @@ export function PriceStack({
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/52">
             {pick(language, {
               en: "Retail Price",
-              hi: "Retail Price",
-              gu: "Retail Price",
+              hi: "रिटेल प्राइस",
+              gu: "રિટેલ પ્રાઇસ",
             })}
           </p>
           <p className={cn("mt-1 font-semibold tracking-tight", valueClassName)}>
@@ -49,8 +49,8 @@ export function PriceStack({
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/80">
             {pick(language, {
               en: "Wholesale Price",
-              hi: "Wholesale Price",
-              gu: "Wholesale Price",
+              hi: "होलसेल प्राइस",
+              gu: "હોલસેલ પ્રાઇસ",
             })}
           </p>
           <p className={cn("mt-1 font-semibold tracking-tight text-primary", valueClassName)}>
@@ -59,7 +59,13 @@ export function PriceStack({
         </div>
       ) : reserveSecondaryRow ? (
         <div className={cn("invisible", rowClassName)} aria-hidden="true">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em]">Wholesale Price</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em]">
+            {pick(language, {
+              en: "Wholesale Price",
+              hi: "होलसेल प्राइस",
+              gu: "હોલસેલ પ્રાઇસ",
+            })}
+          </p>
           <p className={cn("mt-1 font-semibold tracking-tight", valueClassName)}>₹0</p>
         </div>
       ) : null}

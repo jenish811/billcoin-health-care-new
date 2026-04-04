@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -54,13 +54,13 @@ export function ProductDetailsClient({
       : product.priceFrom > 0
         ? `${pick(language, {
             en: "From",
-            hi: "à¤¸à¥‡ à¤¶à¥à¤°à¥‚",
-            gu: "àª¥à«€ àª¶àª°à«‚",
+            hi: "से शुरू",
+            gu: "થી શરૂ",
           })} ${formatINR(product.priceFrom, language)}`
         : pick(language, {
             en: "Contact for price",
-            hi: "à¤•à¥€à¤®à¤¤ à¤•à¥‡ à¤²à¤¿à¤ à¤¸à¤‚à¤ªà¤°à¥à¤• à¤•à¤°à¥‡à¤‚",
-            gu: "àª•àª¿àª‚àª®àª¤ àª®àª¾àªŸà«‡ àª¸àª‚àªªàª°à«àª• àª•àª°à«‹",
+            hi: "कीमत के लिए संपर्क करें",
+            gu: "કિંમત માટે સંપર્ક કરો",
           });
 
   const pricePillLabel = variant?.size ? `${variant.size} - ${selectedPriceLabel}` : selectedPriceLabel;
@@ -119,8 +119,8 @@ export function ProductDetailsClient({
               <Sparkles className="h-3.5 w-3.5" />
               {pick(language, {
                 en: "Featured",
-                hi: "à¤«à¥€à¤šà¤°à¥à¤¡",
-                gu: "àª«à«€àªšàª°à«àª¡",
+                hi: "फीचर्ड",
+                gu: "ફીચર્ડ",
               })}
             </Badge>
           ) : null}
@@ -143,8 +143,8 @@ export function ProductDetailsClient({
             {variant?.size
               ? `${pick(language, {
                   en: "Selected size",
-                  hi: "à¤šà¤¯à¤¨à¤¿à¤¤ à¤¸à¤¾à¤‡à¤œà¤¼",
-                  gu: "àªªàª¸àª‚àª¦ àª•àª°à«‡àª² àª¸àª¾àª‡àª",
+                  hi: "चयनित साइज़",
+                  gu: "પસંદ કરેલ સાઇઝ",
                 })}: ${variant.size}`
               : null}
           </p>
@@ -155,8 +155,8 @@ export function ProductDetailsClient({
             <p className="text-sm font-semibold">
               {pick(language, {
                 en: "Choose size",
-                hi: "à¤¸à¤¾à¤‡à¤œà¤¼ à¤šà¥à¤¨à¥‡à¤‚",
-                gu: "àª¸àª¾àª‡àª àªªàª¸àª‚àª¦ àª•àª°à«‹",
+                hi: "साइज़ चुनें",
+                gu: "સાઇઝ પસંદ કરો",
               })}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -192,20 +192,20 @@ export function ProductDetailsClient({
             variant="secondary"
             aria-label={pick(language, {
               en: "Buy on WhatsApp",
-              hi: "à¤µà¥à¤¹à¤¾à¤Ÿà¥à¤¸à¤à¤ª à¤ªà¤° à¤–à¤°à¥€à¤¦ à¤ªà¥‚à¤›à¥‡à¤‚",
-              gu: "àªµà«‹àªŸà«àª¸àªàªª àªªàª° àª–àª°à«€àª¦à«€ àªªà«‚àª›à«‹",
+              hi: "व्हाट्सऐप पर खरीद पूछें",
+              gu: "વોટ્સએપ પર ખરીદી પૂછો",
             })}
             title={pick(language, {
               en: "Buy on WhatsApp",
-              hi: "à¤µà¥à¤¹à¤¾à¤Ÿà¥à¤¸à¤à¤ª à¤ªà¤° à¤–à¤°à¥€à¤¦ à¤ªà¥‚à¤›à¥‡à¤‚",
-              gu: "àªµà«‹àªŸà«àª¸àªàªª àªªàª° àª–àª°à«€àª¦à«€ àªªà«‚àª›à«‹",
+              hi: "व्हाट्सऐप पर खरीद पूछें",
+              gu: "વોટ્સએપ પર ખરીદી પૂછો",
             })}
           >
             <WhatsAppIcon className="h-5 w-5" />
             {pick(language, {
               en: "Buy on WhatsApp",
-              hi: "à¤µà¥à¤¹à¤¾à¤Ÿà¥à¤¸à¤à¤ª à¤ªà¤° à¤–à¤°à¥€à¤¦à¥‡à¤‚",
-              gu: "àªµà«‹àªŸà«àª¸àªàªª àªªàª° àª–àª°à«€àª¦à«‹",
+              hi: "व्हाट्सऐप पर खरीदें",
+              gu: "વોટ્સએપ પર ખરીદો",
             })}
           </Button>
           <Button
@@ -215,8 +215,8 @@ export function ProductDetailsClient({
           >
             {pick(language, {
               en: "Back to Products",
-              hi: "à¤ªà¥à¤°à¥‹à¤¡à¤•à¥à¤Ÿà¥à¤¸ à¤ªà¤° à¤µà¤¾à¤ªà¤¸",
-              gu: "àªªà«àª°à«‹àª¡àª•à«àªŸà«àª¸ àªªàª° àªªàª¾àª›àª¾",
+              hi: "प्रोडक्ट्स पर वापस",
+              gu: "પ્રોડક્ટ્સ પર પાછા",
             })}
           </Button>
           <Link href={productUrl} className="sr-only">
@@ -230,8 +230,8 @@ export function ProductDetailsClient({
           <p className="text-sm font-semibold">
             {pick(language, {
               en: "Key benefits",
-              hi: "à¤®à¥à¤–à¥à¤¯ à¤«à¤¾à¤¯à¤¦à¥‡",
-              gu: "àª®à«àª–à«àª¯ àª«àª¾àª¯àª¦àª¾",
+              hi: "मुख्य फायदे",
+              gu: "મુખ્ય ફાયદા",
             })}
           </p>
           <ul className="mt-3 grid gap-2 text-sm text-foreground/70">

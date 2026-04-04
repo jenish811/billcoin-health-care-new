@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -26,30 +26,6 @@ type PreviewFrame = {
 type LoadedPreviewFrame = PreviewFrame & {
   imageElement: HTMLImageElement;
 };
-
-const previewFrames: PreviewFrame[] = [
-  {
-    accent: "#8b74c4",
-    image: "/images/about-brand.png",
-    label: "Step 1",
-    title: "Own manufacturing",
-    text: "We create our own Billcoin range instead of buying finished products from outside suppliers.",
-  },
-  {
-    accent: "#b39cf0",
-    image: "/images/hero-cleaning.png",
-    label: "Step 2",
-    title: "Quality and filling",
-    text: "Show mixing, checking, filling, and sealing so customers can see the process is controlled.",
-  },
-  {
-    accent: "#6d58a5",
-    image: "/images/distributor-box.png",
-    label: "Step 3",
-    title: "Packed and ready",
-    text: "Finish with final packed products and a direct message that Billcoin products are made in-house.",
-  },
-];
 
 function getVideoMimeType() {
   if (typeof window === "undefined" || typeof window.MediaRecorder === "undefined") {
@@ -169,7 +145,7 @@ function drawPreviewFrame(
   }
 }
 
-async function createGeneratedVideo() {
+async function createGeneratedVideo(frames: PreviewFrame[]) {
   if (
     typeof window === "undefined" ||
     typeof window.MediaRecorder === "undefined" ||
@@ -194,14 +170,14 @@ async function createGeneratedVideo() {
   }
 
   try {
-    const frames: LoadedPreviewFrame[] = await Promise.all(
-      previewFrames.map(async (frame) => ({
+    const loadedFrames: LoadedPreviewFrame[] = await Promise.all(
+      frames.map(async (frame) => ({
         ...frame,
         imageElement: await loadImage(frame.image),
       })),
     );
 
-    if (!frames.length) {
+    if (!loadedFrames.length) {
       return null;
     }
 
@@ -239,7 +215,7 @@ async function createGeneratedVideo() {
     recorder.start(250);
 
     const frameDuration = 2200;
-    const totalDuration = frameDuration * frames.length;
+    const totalDuration = frameDuration * loadedFrames.length;
 
     await new Promise<void>((resolve) => {
       let startTime: number | null = null;
@@ -252,11 +228,11 @@ async function createGeneratedVideo() {
         const elapsed = Math.max(0, timestamp - startTime);
         const safeElapsed = Math.min(elapsed, Math.max(0, totalDuration - 16));
         const frameIndex = Math.min(
-          frames.length - 1,
+          loadedFrames.length - 1,
           Math.max(0, Math.floor(safeElapsed / frameDuration)),
         );
         const frameProgress = (safeElapsed % frameDuration) / frameDuration;
-        const activeFrame = frames[frameIndex];
+        const activeFrame = loadedFrames[frameIndex];
 
         if (!activeFrame) {
           recorder.stop();
@@ -296,38 +272,151 @@ export function ProductVideoSection() {
   const { language } = useAppPreferences();
   const [videoMode, setVideoMode] = useState<VideoMode>("loading");
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
+  const storyAlt = pick(language, {
+    en: "Billcoin product story",
+    hi: "Billcoin प्रोडक्ट स्टोरी",
+    gu: "Billcoin પ્રોડક્ટ સ્ટોરી",
+  });
+
+  const previewFrames = useMemo<PreviewFrame[]>(() => [
+    {
+      accent: "#8b74c4",
+      image: "/images/about-brand.png",
+      label: pick(language, {
+        en: "Step 1",
+        hi: "स्टेप 1",
+        gu: "સ્ટેપ 1",
+      }),
+      title: pick(language, {
+        en: "Own manufacturing",
+        hi: "अपना मैन्युफैक्चरिंग",
+        gu: "પોતાનું મેન્યુફેક્ચરિંગ",
+      }),
+      text: pick(language, {
+        en: "We create our own Billcoin range instead of buying finished products from outside suppliers.",
+        hi: "हम बाहर के सप्लायर्स से तैयार माल खरीदने के बजाय अपनी Billcoin रेंज खुद बनाते हैं।",
+        gu: "અમે બહારના સપ્લાયર્સ પાસેથી તૈયાર માલ ખરીદવાને બદલે પોતાની Billcoin રેન્જ જાતે બનાવીએ છીએ.",
+      }),
+    },
+    {
+      accent: "#b39cf0",
+      image: "/images/hero-cleaning.png",
+      label: pick(language, {
+        en: "Step 2",
+        hi: "स्टेप 2",
+        gu: "સ્ટેપ 2",
+      }),
+      title: pick(language, {
+        en: "Quality and filling",
+        hi: "क्वालिटी और फिलिंग",
+        gu: "ક્વોલિટી અને ફિલિંગ",
+      }),
+      text: pick(language, {
+        en: "Show mixing, checking, filling, and sealing so customers can see the process is controlled.",
+        hi: "मिक्सिंग, चेकिंग, फिलिंग और सीलिंग दिखाइए ताकि ग्राहक देख सके कि प्रक्रिया नियंत्रित है।",
+        gu: "મિક્સિંગ, ચેકિંગ, ફિલિંગ અને સીલિંગ બતાવો જેથી ગ્રાહક જોઈ શકે કે પ્રક્રિયા નિયંત્રિત છે.",
+      }),
+    },
+    {
+      accent: "#6d58a5",
+      image: "/images/distributor-box.png",
+      label: pick(language, {
+        en: "Step 3",
+        hi: "स्टेप 3",
+        gu: "સ્ટેપ 3",
+      }),
+      title: pick(language, {
+        en: "Packed and ready",
+        hi: "पैक होकर तैयार",
+        gu: "પેક થઈને તૈયાર",
+      }),
+      text: pick(language, {
+        en: "Finish with final packed products and a direct message that Billcoin products are made in-house.",
+        hi: "अंत में पैक्ड प्रोडक्ट दिखाइए और साफ कहिए कि Billcoin प्रोडक्ट इन-हाउस बनते हैं।",
+        gu: "અંતે પેક થયેલા પ્રોડક્ટ બતાવો અને સ્પષ્ટ કહો કે Billcoin પ્રોડક્ટ ઇન-હાઉસ બને છે.",
+      }),
+    },
+  ], [language]);
 
   const statusCopy = useMemo(() => {
     if (videoMode === "local") {
       return {
-        badge: "Real Video",
-        title: "Your uploaded factory video is playing now.",
-        text: "This section is reading the local MP4 file and showing your actual production story.",
+        badge: pick(language, {
+          en: "Real Video",
+          hi: "असली वीडियो",
+          gu: "અસલી વિડિયો",
+        }),
+        title: pick(language, {
+          en: "Your uploaded factory video is playing now.",
+          hi: "आपका अपलोड किया हुआ फैक्ट्री वीडियो अभी चल रहा है।",
+          gu: "તમે અપલોડ કરેલો ફેક્ટરી વિડિયો હાલમાં ચાલી રહ્યો છે.",
+        }),
+        text: pick(language, {
+          en: "This section is reading the local MP4 file and showing your actual production story.",
+          hi: "यह सेक्शन लोकल MP4 फाइल पढ़कर आपकी असली प्रोडक्शन स्टोरी दिखा रहा है।",
+          gu: "આ વિભાગ લોકલ MP4 ફાઇલ વાંચીને તમારી અસલી પ્રોડક્શન સ્ટોરી બતાવી રહ્યો છે.",
+        }),
       };
     }
 
     if (videoMode === "generated") {
       return {
-        badge: "Live Preview",
-        title: "Built-in preview is playing until your real MP4 is added.",
-        text: "I generated a short story video from your existing brand images so the section is no longer empty.",
+        badge: pick(language, {
+          en: "Live Preview",
+          hi: "लाइव प्रीव्यू",
+          gu: "લાઇવ પ્રીવ્યૂ",
+        }),
+        title: pick(language, {
+          en: "Built-in preview is playing until your real MP4 is added.",
+          hi: "जब तक आपका असली MP4 नहीं जुड़ता, बिल्ट-इन प्रीव्यू चल रहा है।",
+          gu: "જ્યાં સુધી તમારું અસલી MP4 ઉમેરાતું નથી, ત્યાં સુધી બિલ્ટ-ઇન પ્રીવ્યૂ ચાલી રહ્યું છે.",
+        }),
+        text: pick(language, {
+          en: "I generated a short story video from your existing brand images so the section is no longer empty.",
+          hi: "मैंने आपकी मौजूदा ब्रांड इमेजेस से एक छोटा स्टोरी वीडियो बनाया है ताकि यह सेक्शन खाली न रहे।",
+          gu: "તમારી હાલની બ્રાન્ડ ઇમેજિસમાંથી મેં ટૂંકું સ્ટોરી વિડિયો બનાવ્યો છે જેથી આ વિભાગ ખાલી ન રહે.",
+        }),
       };
     }
 
     if (videoMode === "missing") {
       return {
-        badge: "Video Missing",
-        title: "Add a real file to enable your actual factory video.",
-        text: `Put an MP4 at ${localVideoPath} and it will replace the preview automatically.`,
+        badge: pick(language, {
+          en: "Video Missing",
+          hi: "वीडियो नहीं मिला",
+          gu: "વિડિયો મળ્યો નથી",
+        }),
+        title: pick(language, {
+          en: "Add a real file to enable your actual factory video.",
+          hi: "अपना असली फैक्ट्री वीडियो चालू करने के लिए फाइल जोड़ें।",
+          gu: "તમારો અસલી ફેક્ટરી વિડિયો ચાલુ કરવા માટે ફાઇલ ઉમેરો.",
+        }),
+        text: pick(language, {
+          en: `Put an MP4 at ${localVideoPath} and it will replace the preview automatically.`,
+          hi: `${localVideoPath} पर MP4 रखें, यह प्रीव्यू अपने आप बदल जाएगा।`,
+          gu: `${localVideoPath} પર MP4 મૂકો, આ પ્રીવ્યૂ પોતે બદલાઈ જશે.`,
+        }),
       };
     }
 
     return {
-      badge: "Checking",
-      title: "Preparing the product story section.",
-      text: "Checking for a real MP4 first, then building a fallback preview if needed.",
+      badge: pick(language, {
+        en: "Checking",
+        hi: "जांच रहे हैं",
+        gu: "ચેક કરી રહ્યા છીએ",
+      }),
+      title: pick(language, {
+        en: "Preparing the product story section.",
+        hi: "प्रोडक्ट स्टोरी सेक्शन तैयार किया जा रहा है।",
+        gu: "પ્રોડક્ટ સ્ટોરી વિભાગ તૈયાર થઈ રહ્યો છે.",
+      }),
+      text: pick(language, {
+        en: "Checking for a real MP4 first, then building a fallback preview if needed.",
+        hi: "पहले असली MP4 जांच रहे हैं, नहीं मिले तो फॉलबैक प्रीव्यू बनाया जाएगा।",
+        gu: "સૌપ્રથમ અસલી MP4 ચેક કરી રહ્યા છીએ, ન મળે તો ફોલબેક પ્રીવ્યૂ બનાવાશે.",
+      }),
     };
-  }, [videoMode]);
+  }, [language, videoMode]);
 
   useEffect(() => {
     let cancelled = false;
@@ -351,7 +440,7 @@ export function ProductVideoSection() {
         // Ignore and fall back to a generated preview.
       }
 
-      const previewUrl = await createGeneratedVideo();
+      const previewUrl = await createGeneratedVideo(previewFrames);
 
       if (cancelled) {
         if (previewUrl) {
@@ -380,7 +469,7 @@ export function ProductVideoSection() {
         URL.revokeObjectURL(generatedUrl);
       }
     };
-  }, []);
+  }, [previewFrames]);
 
   return (
     <section className="section-y">
@@ -405,7 +494,7 @@ export function ProductVideoSection() {
                 <div className="relative aspect-video">
                   <Image
                     src={posterPath}
-                    alt="Billcoin product story"
+                    alt={storyAlt}
                     fill
                     className="object-cover opacity-80"
                     sizes="(max-width: 1024px) 100vw, 52vw"
@@ -425,8 +514,8 @@ export function ProductVideoSection() {
                 <Video className="h-3.5 w-3.5" />
                 {pick(language, {
                   en: "Product Video",
-                  hi: "Product Video",
-                  gu: "Product Video",
+                  hi: "प्रोडक्ट वीडियो",
+                  gu: "પ્રોડક્ટ વિડિયો",
                 })}
               </div>
 
@@ -450,18 +539,18 @@ export function ProductVideoSection() {
           <SectionHeading
             eyebrow={pick(language, {
               en: "How We Make It",
-              hi: "How We Make It",
-              gu: "How We Make It",
+              hi: "हम इसे कैसे बनाते हैं",
+              gu: "અમે તેને કેવી રીતે બનાવીએ છીએ",
             })}
             title={pick(language, {
               en: "Billcoin creates its own products, not bought from another supplier",
-              hi: "Billcoin creates its own products, not bought from another supplier",
-              gu: "Billcoin creates its own products, not bought from another supplier",
+              hi: "Billcoin अपने प्रोडक्ट खुद बनाता है, किसी दूसरे सप्लायर से खरीदे हुए नहीं",
+              gu: "Billcoin પોતાના પ્રોડક્ટ પોતે બનાવે છે, બીજા સપ્લાયર પાસેથી લીધેલા નથી",
             })}
             description={pick(language, {
               en: "Use this section to prove your own production, quality control, and packaging process in a direct way.",
-              hi: "Use this section to prove your own production, quality control, and packaging process in a direct way.",
-              gu: "Use this section to prove your own production, quality control, and packaging process in a direct way.",
+              hi: "इस सेक्शन से अपनी प्रोडक्शन, क्वालिटी कंट्रोल और पैकेजिंग प्रोसेस को सीधे दिखाइए।",
+              gu: "આ વિભાગમાં તમારી પ્રોડક્શન, ક્વોલિટી કંટ્રોલ અને પેકેજિંગ પ્રક્રિયાને સીધી રીતે બતાવો.",
             })}
           />
 
@@ -471,39 +560,39 @@ export function ProductVideoSection() {
                 icon: Factory,
                 title: {
                   en: "1. Show your plant or mixing area",
-                  hi: "1. Show your plant or mixing area",
-                  gu: "1. Show your plant or mixing area",
+                  hi: "1. अपना प्लांट या मिक्सिंग एरिया दिखाएं",
+                  gu: "1. તમારું પ્લાન્ટ અથવા મિક્સિંગ એરિયા બતાવો",
                 },
                 text: {
                   en: "Start with real visuals from your own setup and state clearly that Billcoin does not buy finished goods from another company.",
-                  hi: "Start with real visuals from your own setup and state clearly that Billcoin does not buy finished goods from another company.",
-                  gu: "Start with real visuals from your own setup and state clearly that Billcoin does not buy finished goods from another company.",
+                  hi: "अपनी सेटअप के असली विज़ुअल्स से शुरू करें और साफ बताएं कि Billcoin किसी दूसरी कंपनी से तैयार माल नहीं खरीदता।",
+                  gu: "તમારા સેટઅપના અસલી વિઝ્યુઅલ્સથી શરૂઆત કરો અને સ્પષ્ટ કહો કે Billcoin બીજી કંપની પાસેથી તૈયાર માલ ખરીદતું નથી.",
                 },
               },
               {
                 icon: ShieldCheck,
                 title: {
                   en: "2. Show quality control",
-                  hi: "2. Show quality control",
-                  gu: "2. Show quality control",
+                  hi: "2. क्वालिटी कंट्रोल दिखाएं",
+                  gu: "2. ક્વોલિટી કંટ્રોલ બતાવો",
                 },
                 text: {
                   en: "Add shots of checking, measuring, sealing, and inspection so the customer can trust the process.",
-                  hi: "Add shots of checking, measuring, sealing, and inspection so the customer can trust the process.",
-                  gu: "Add shots of checking, measuring, sealing, and inspection so the customer can trust the process.",
+                  hi: "चेकिंग, मेज़रिंग, सीलिंग और इंस्पेक्शन के शॉट्स जोड़ें ताकि ग्राहक प्रक्रिया पर भरोसा करे।",
+                  gu: "ચેકિંગ, માપણી, સીલિંગ અને ઇન્સ્પેક્શનના શોટ્સ ઉમેરો જેથી ગ્રાહક પ્રક્રિયા પર વિશ્વાસ કરે.",
                 },
               },
               {
                 icon: PackageCheck,
                 title: {
                   en: "3. End with packed products",
-                  hi: "3. End with packed products",
-                  gu: "3. End with packed products",
+                  hi: "3. पैक्ड प्रोडक्ट पर खत्म करें",
+                  gu: "3. પેક થયેલા પ્રોડક્ટથી પૂર્ણ કરો",
                 },
                 text: {
                   en: "Finish with your product lineup and one direct message that Billcoin products are made in-house for daily use.",
-                  hi: "Finish with your product lineup and one direct message that Billcoin products are made in-house for daily use.",
-                  gu: "Finish with your product lineup and one direct message that Billcoin products are made in-house for daily use.",
+                  hi: "अपनी प्रोडक्ट लाइनअप के साथ खत्म करें और साफ संदेश दें कि Billcoin प्रोडक्ट रोज़मर्रा उपयोग के लिए इन-हाउस बने हैं।",
+                  gu: "તમારી પ્રોડક્ટ લાઇનઅપ સાથે પૂર્ણ કરો અને સ્પષ્ટ સંદેશ આપો કે Billcoin પ્રોડક્ટ રોજિંદા ઉપયોગ માટે ઇન-હાઉસ બને છે.",
                 },
               },
             ].map((item) => {
@@ -528,15 +617,15 @@ export function ProductVideoSection() {
             <Button href="/contact?type=distributor" size="lg">
               {pick(language, {
                 en: "Talk To Us",
-                hi: "Talk To Us",
-                gu: "Talk To Us",
+                hi: "हमसे बात करें",
+                gu: "અમારી સાથે વાત કરો",
               })}
             </Button>
             <Button href="/products" variant="outline" size="lg">
               {pick(language, {
                 en: "See Products",
-                hi: "See Products",
-                gu: "See Products",
+                hi: "प्रोडक्ट देखें",
+                gu: "પ્રોડક્ટ જુઓ",
               })}
             </Button>
           </div>
@@ -545,8 +634,3 @@ export function ProductVideoSection() {
     </section>
   );
 }
-
-
-
-
-

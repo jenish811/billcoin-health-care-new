@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -49,8 +49,8 @@ export function ProductCard({
               <Sparkles className="h-3.5 w-3.5" />
               {pick(language, {
                 en: "Featured",
-                hi: "Ã Â¤Â«Ã Â¥â‚¬Ã Â¤Å¡Ã Â¤Â°Ã Â¥ÂÃ Â¤Â¡",
-                gu: "Ã ÂªÂ«Ã Â«â‚¬Ã ÂªÅ¡Ã ÂªÂ°Ã Â«ÂÃ ÂªÂ¡",
+                hi: "फीचर्ड",
+                gu: "ફીચર્ડ",
               })}
             </Badge>
           ) : null}
@@ -125,13 +125,13 @@ export function ProductCard({
                   {variant?.size
                     ? `${pick(language, {
                         en: "Selected size",
-                        hi: "Ã Â¤Å¡Ã Â¤Â¯Ã Â¤Â¨Ã Â¤Â¿Ã Â¤Â¤ Ã Â¤Â¸Ã Â¤Â¾Ã Â¤â€¡Ã Â¤Å“Ã Â¤Â¼",
-                        gu: "Ã ÂªÂªÃ ÂªÂ¸Ã Âªâ€šÃ ÂªÂ¦ Ã Âªâ€¢Ã ÂªÂ°Ã Â«â€¡Ã ÂªÂ² Ã ÂªÂ¸Ã ÂªÂ¾Ã Âªâ€¡Ã ÂªÂ",
+                        hi: "चयनित साइज़",
+                        gu: "પસંદ કરેલ સાઇઝ",
                       })}: ${variant.size}`
                     : pick(language, {
                         en: "Starting price",
-                        hi: "Ã Â¤Â¶Ã Â¥ÂÃ Â¤Â°Ã Â¥ÂÃ Â¤â€ Ã Â¤Â¤Ã Â¥â‚¬ Ã Â¤â€¢Ã Â¥â‚¬Ã Â¤Â®Ã Â¤Â¤",
-                        gu: "Ã ÂªÂ¶Ã ÂªÂ°Ã Â«â€šÃ Âªâ€ Ã ÂªÂ¤Ã ÂªÂ¨Ã Â«â‚¬ Ã Âªâ€¢Ã ÂªÂ¿Ã Âªâ€šÃ ÂªÂ®Ã ÂªÂ¤",
+                        hi: "शुरुआती कीमत",
+                        gu: "શરૂઆતની કિંમત",
                       })}
                 </p>
               </div>
@@ -143,8 +143,8 @@ export function ProductCard({
               >
                 {pick(language, {
                   en: "View",
-                  hi: "Ã Â¤Â¦Ã Â¥â€¡Ã Â¤â€“Ã Â¥â€¡Ã Â¤â€š",
-                  gu: "Ã ÂªÅ“Ã Â«ÂÃ Âªâ€œ",
+                  hi: "देखें",
+                  gu: "જુઓ",
                 })}
                 <ChevronRight className="h-4 w-4" />
               </Link>

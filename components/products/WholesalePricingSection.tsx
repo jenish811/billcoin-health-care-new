@@ -57,22 +57,22 @@ export function WholesalePricingSection({
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary/85">
               {pick(language, {
                 en: "Wholesale Section",
-                hi: "Wholesale Section",
-                gu: "Wholesale Section",
+                hi: "होलसेल सेक्शन",
+                gu: "હોલસેલ સેક્શન",
               })}
             </p>
             <h2 className="mt-1 text-xl font-semibold tracking-tight">
               {pick(language, {
                 en: "Wholesale / Dealer Price",
-                hi: "Wholesale / Dealer Price",
-                gu: "Wholesale / Dealer Price",
+                hi: "होलसेल / डीलर प्राइस",
+                gu: "હોલસેલ / ડીલર પ્રાઇસ",
               })}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-foreground/72">
               {pick(language, {
                 en: "Retail pricing stays visible above. This section is only for wholesale, bulk, and distributor enquiries.",
-                hi: "Retail pricing stays visible above. This section is only for wholesale, bulk, and distributor enquiries.",
-                gu: "Retail pricing stays visible above. This section is only for wholesale, bulk, and distributor enquiries.",
+                hi: "ऊपर रिटेल कीमत दिखती रहती है। यह सेक्शन सिर्फ होलसेल, बल्क और डिस्ट्रीब्यूटर पूछताछ के लिए है।",
+                gu: "ઉપર રિટેલ કિંમત દેખાતી રહે છે. આ વિભાગ ફક્ત હોલસેલ, બલ્ક અને ડિસ્ટ્રિબ્યુટર પૂછપરછ માટે છે.",
               })}
             </p>
           </div>
@@ -84,16 +84,16 @@ export function WholesalePricingSection({
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/52">
             {pick(language, {
               en: "Selected Size",
-              hi: "Selected Size",
-              gu: "Selected Size",
+              hi: "चयनित साइज़",
+              gu: "પસંદ કરેલ સાઇઝ",
             })}
           </p>
           <p className="mt-2 text-2xl font-semibold tracking-tight">{variant.size}</p>
           <p className="mt-2 text-sm text-foreground/65">
             {pick(language, {
               en: "Wholesale price from the PDF D.PRICE list.",
-              hi: "Wholesale price from the PDF D.PRICE list.",
-              gu: "Wholesale price from the PDF D.PRICE list.",
+              hi: "होलसेल कीमत PDF की D.PRICE लिस्ट से ली गई है।",
+              gu: "હોલસેલ કિંમત PDF ની D.PRICE યાદીમાંથી લેવામાં આવી છે.",
             })}
           </p>
         </div>
@@ -102,8 +102,8 @@ export function WholesalePricingSection({
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">
             {pick(language, {
               en: "Wholesale Price",
-              hi: "Wholesale Price",
-              gu: "Wholesale Price",
+              hi: "होलसेल प्राइस",
+              gu: "હોલસેલ પ્રાઇસ",
             })}
           </p>
           <p className="mt-2 text-3xl font-semibold tracking-tight">
@@ -113,8 +113,8 @@ export function WholesalePricingSection({
             {retailPrice > 0
               ? `${pick(language, {
                 en: "Retail",
-                hi: "Retail",
-                gu: "Retail",
+                hi: "रिटेल",
+                gu: "રિટેલ",
               })}: ${formatINR(retailPrice, language)}`
               : null}
           </p>
@@ -122,8 +122,8 @@ export function WholesalePricingSection({
             <p className="mt-1 text-sm font-medium text-primary">
               {pick(language, {
                 en: `Margin window: ${formatINR(savings, language)} per unit`,
-                hi: `Margin window: ${formatINR(savings, language)} per unit`,
-                gu: `Margin window: ${formatINR(savings, language)} per unit`,
+                hi: `मार्जिन विंडो: ${formatINR(savings, language)} प्रति यूनिट`,
+                gu: `માર્જિન વિન્ડો: ${formatINR(savings, language)} પ્રતિ યુનિટ`,
               })}
             </p>
           ) : null}
@@ -134,15 +134,15 @@ export function WholesalePricingSection({
         <Button href={wholesaleWhatsAppHref} target="_blank" rel="noreferrer" size="lg">
           {pick(language, {
             en: "Talk Wholesale on WhatsApp",
-            hi: "Talk Wholesale on WhatsApp",
-            gu: "Talk Wholesale on WhatsApp",
+            hi: "व्हाट्सऐप पर होलसेल बात करें",
+            gu: "વોટ્સએપ પર હોલસેલ વાત કરો",
           })}
         </Button>
         <Button href="/contact?type=distributor" variant="outline" size="lg">
           {pick(language, {
             en: "Open Distributor Form",
-            hi: "Open Distributor Form",
-            gu: "Open Distributor Form",
+            hi: "डिस्ट्रीब्यूटर फॉर्म खोलें",
+            gu: "ડિસ્ટ્રિબ્યુટર ફોર્મ ખોલો",
           })}
         </Button>
       </div>
