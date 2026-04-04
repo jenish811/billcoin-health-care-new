@@ -10,8 +10,8 @@ export function Logo({ className }: { className?: string }) {
       aria-label="Billcoin Health Care"
     >
       {/* Replace logo file at `public/images/web_logo.png` */}
-      <span className="rounded-2xl bg-white/90 px-4 py-3 shadow-sm ring-1 ring-border backdrop-blur sm:py-3.5 dark:bg-white">
-        <span className="relative block h-10 w-32 sm:h-11 sm:w-40">
+      <span className="rounded-[22px] bg-white/96 px-3 py-2.5 shadow-[var(--shadow-soft)] ring-1 ring-border/80 backdrop-blur sm:px-4 sm:py-3.5">
+        <span className="relative block h-8 w-28 sm:h-11 sm:w-40">
           <Image
             src="/images/web_logo.png"
             alt="Billcoin"

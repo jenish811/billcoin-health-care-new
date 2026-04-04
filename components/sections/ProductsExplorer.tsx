@@ -37,8 +37,6 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
   }, [category, query]);
 
   const tabs: Tab[] = [allLabel, ...productCategoryOrder];
-  const remainder = filtered.length % 3;
-
   return (
     <div className="grid gap-8">
       <div className="surface-panel rounded-[32px] p-6 sm:p-8">
@@ -115,7 +113,7 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
               className={cn(
                 "whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition",
                 active
-                  ? "border-primary bg-primary text-slate-950 shadow-[0_16px_34px_rgba(13,148,136,0.22)]"
+                  ? "border-primary bg-primary text-[#140f22] shadow-[var(--shadow-brand-soft)]"
                   : "border-border bg-card text-foreground/72 hover:bg-muted",
               )}
               aria-pressed={active}
@@ -128,16 +126,10 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
 
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-6">
         <AnimatePresence mode="popLayout" initial={false}>
-          {filtered.map((product, index) => (
+          {filtered.map((product) => (
             <motion.div
               key={product.id}
-              className={
-                remainder === 1 && index === filtered.length - 1
-                  ? "xl:col-span-6"
-                  : remainder === 2 && index >= filtered.length - 2
-                    ? "xl:col-span-3"
-                    : "xl:col-span-2"
-              }
+              className="xl:col-span-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
@@ -151,6 +143,5 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
     </div>
   );
 }
-
 
 

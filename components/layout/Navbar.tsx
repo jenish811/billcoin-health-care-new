@@ -102,11 +102,11 @@ export function Navbar() {
         className={cn(
           "border-b transition duration-200 backdrop-blur-2xl",
           scrolled
-            ? "bg-background/88 shadow-[var(--shadow-soft)]"
-            : "bg-background/72",
+            ? "bg-background/95 shadow-[var(--shadow-soft)]"
+            : "bg-background/90",
         )}
       >
-        <Container className="flex min-h-18 items-center justify-between gap-4 py-3">
+        <Container className="flex min-h-18 items-center justify-between gap-3 py-3 sm:gap-4">
           <Logo />
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">

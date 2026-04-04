@@ -25,11 +25,11 @@ type AppPreferencesValue = {
 const AppPreferencesContext = createContext<AppPreferencesValue | null>(null);
 
 const languageStorageKey = "billcoin-language";
-const themeStorageKey = "billcoin-theme";
+const themeStorageKey = "billcoin-theme-v3";
 
 export function AppPreferencesProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<AppLanguage>("en");
-  const [theme, setTheme] = useState<ThemeMode>("light");
+  const [theme, setTheme] = useState<ThemeMode>("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -43,11 +43,7 @@ export function AppPreferencesProvider({ children }: { children: ReactNode }) {
     const nextTheme =
       savedTheme === "dark" || savedTheme === "light"
         ? savedTheme
-        : document.documentElement.classList.contains("dark")
-          ? "dark"
-          : window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
+        : "dark";
 
     setLanguage(nextLanguage);
     setTheme(nextTheme);

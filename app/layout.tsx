@@ -61,15 +61,13 @@ export default function RootLayout({
     <html
       lang="en-IN"
       suppressHydrationWarning
-      className={`h-full antialiased ${appSans.variable} ${appDisplay.variable} ${appHindi.variable} ${appGujarati.variable}`}
+      className={`h-full antialiased dark ${appSans.variable} ${appDisplay.variable} ${appHindi.variable} ${appGujarati.variable}`}
     >
       <body className="min-h-full flex flex-col">
         <Script id="billcoin-preferences" strategy="beforeInteractive">
           {`try {
-            var theme = localStorage.getItem('billcoin-theme');
-            if (theme !== 'light' && theme !== 'dark') {
-              theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            }
+            var theme = localStorage.getItem('billcoin-theme-v3');
+            if (theme !== 'light' && theme !== 'dark') theme = 'dark';
             document.documentElement.dataset.theme = theme;
             document.documentElement.classList.toggle('dark', theme === 'dark');
           } catch (error) {}
@@ -82,7 +80,7 @@ export default function RootLayout({
         </Script>
         <AppPreferencesProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-2 sm:pt-3">{children}</main>
           <Footer />
         </AppPreferencesProvider>
       </body>

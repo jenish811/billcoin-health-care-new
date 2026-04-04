@@ -342,17 +342,9 @@ export function HomePageContent() {
           />
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-6">
-            {productCategories.map((category, index) => {
-              const remainder = productCategories.length % 3;
-              const xlSpanClass =
-                remainder === 1 && index === productCategories.length - 1
-                  ? "xl:col-span-6"
-                  : remainder === 2 && index >= productCategories.length - 2
-                    ? "xl:col-span-3"
-                    : "xl:col-span-2";
-
+            {productCategories.map((category) => {
               return (
-                <div key={category.category} className={xlSpanClass}>
+                <div key={category.category} className="xl:col-span-2">
                   <CategoryCard
                     title={category.title}
                     description={category.description}
@@ -520,7 +512,6 @@ export function HomePageContent() {
     </div>
   );
 }
-
 
 
 

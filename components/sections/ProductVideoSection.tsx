@@ -29,21 +29,21 @@ type LoadedPreviewFrame = PreviewFrame & {
 
 const previewFrames: PreviewFrame[] = [
   {
-    accent: "#0f766e",
+    accent: "#8b74c4",
     image: "/images/about-brand.png",
     label: "Step 1",
     title: "Own manufacturing",
     text: "We create our own Billcoin range instead of buying finished products from outside suppliers.",
   },
   {
-    accent: "#d97706",
+    accent: "#b39cf0",
     image: "/images/hero-cleaning.png",
     label: "Step 2",
     title: "Quality and filling",
     text: "Show mixing, checking, filling, and sealing so customers can see the process is controlled.",
   },
   {
-    accent: "#0891b2",
+    accent: "#6d58a5",
     image: "/images/distributor-box.png",
     label: "Step 3",
     title: "Packed and ready",
@@ -101,7 +101,7 @@ function drawPreviewFrame(
   const { width, height } = canvas;
 
   context.clearRect(0, 0, width, height);
-  context.fillStyle = "#020617";
+  context.fillStyle = "#0d0a15";
   context.fillRect(0, 0, width, height);
 
   const sourceRatio = image.width / image.height;

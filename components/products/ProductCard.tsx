@@ -128,7 +128,7 @@ export function ProductCard({
 
               <Link
                 href={`/products/${product.id}?variant=${encodeURIComponent(variant?.id ?? product.variants[0]?.id ?? "")}`}
-                className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-slate-950 shadow-[0_16px_34px_rgba(13,148,136,0.24)] transition hover:bg-primary-2"
+                className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-[#140f22] shadow-[var(--shadow-brand-soft)] transition hover:bg-primary-2"
                 aria-label={`View details for ${product.title}`}
               >
                 {pick(language, {

@@ -51,9 +51,9 @@ export function CategoryCard({
 
   return (
     <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
-       <Card className="group flex h-full flex-col overflow-hidden">
-        <div className="surface-showcase relative overflow-hidden rounded-[28px] p-5">
-          <div className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_32%)]" />
+      <Card className="group flex h-full flex-col overflow-hidden shadow-[var(--shadow-card)]">
+        <div className="surface-category relative overflow-hidden rounded-[28px] border-b border-border/60 p-5">
+          <div className="absolute inset-0 opacity-55 [background:radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--primary)_16%,transparent),transparent_34%)]" />
           <div className="relative flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">
@@ -67,7 +67,7 @@ export function CategoryCard({
                 {getCategoryLabel(language, categoryKey)}
               </h3>
             </div>
-            <div className="rounded-full bg-background/80 px-3 py-1 text-xs font-semibold text-foreground/70">
+            <div className="rounded-full border border-border/70 bg-card px-3 py-1 text-xs font-semibold text-foreground/75 shadow-sm backdrop-blur">
               {sizes.length} {pick(language, { en: "sizes", hi: "ÃƒÂ Ã‚Â¤Ã‚Â¸ÃƒÂ Ã‚Â¤Ã‚Â¾ÃƒÂ Ã‚Â¤Ã¢â‚¬Â¡ÃƒÂ Ã‚Â¤Ã…â€œÃƒÂ Ã‚Â¤Ã‚Â¼", gu: "ÃƒÂ Ã‚ÂªÃ‚Â¸ÃƒÂ Ã‚ÂªÃ‚Â¾ÃƒÂ Ã‚ÂªÃ¢â‚¬Â¡ÃƒÂ Ã‚ÂªÃ‚Â" })}
             </div>
           </div>

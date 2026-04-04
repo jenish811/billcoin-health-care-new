@@ -20,7 +20,7 @@ export function HomeHero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: easing }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-4 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur dark:bg-white/5"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur"
           >
             <Sparkles className="h-4 w-4 text-primary" />
             Premium Home Care • Rajkot, Gujarat

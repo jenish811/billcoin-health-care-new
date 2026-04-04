@@ -103,9 +103,9 @@ function getButtonClasses({
 
   const variants: Record<ButtonVariant, string> = {
     primary:
-      "bg-primary text-slate-950 shadow-[0_16px_34px_rgba(13,148,136,0.28)] hover:bg-primary-2",
+      "bg-primary text-[#140f22] shadow-[var(--shadow-brand)] hover:bg-primary-2",
     secondary:
-      "bg-secondary text-slate-950 shadow-[0_16px_34px_rgba(217,119,6,0.24)] hover:brightness-105",
+      "bg-secondary text-[#140f22] shadow-[var(--shadow-brand-soft)] hover:brightness-105",
     outline:
       "border border-border bg-card text-foreground hover:bg-background/90",
     ghost: "text-foreground hover:bg-muted",
