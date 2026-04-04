@@ -30,6 +30,11 @@ export function ProductCard({
   const benefits = useMemo(() => product.benefits.slice(0, compact ? 2 : 3), [product, compact]);
   const retailPrice = variant?.price ?? (product.priceFrom > 0 ? product.priceFrom : undefined);
   const wholesalePrice = variant?.wholesalePrice;
+  const titleBlockClass = compact ? "min-h-[3.75rem]" : "min-h-[4rem]";
+  const descriptionBlockClass = compact ? "min-h-[3.75rem]" : "min-h-[4.5rem]";
+  const sizeRowClass = compact ? "min-h-[3rem]" : "min-h-[3.25rem]";
+  const benefitsBlockClass = compact ? "min-h-[4.75rem]" : "min-h-[6rem]";
+  const pricePanelClass = compact ? "min-h-[9.5rem]" : "min-h-[10rem]";
 
   return (
     <Card className="group flex h-full flex-col overflow-hidden">
@@ -63,14 +68,18 @@ export function ProductCard({
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-xl font-semibold tracking-tight">{product.title}</h3>
-        {product.tagline ? (
-          <p className="mt-1 text-sm font-semibold text-primary/90">{product.tagline}</p>
-        ) : null}
+        <div className={titleBlockClass}>
+          <h3 className="text-xl font-semibold tracking-tight">{product.title}</h3>
+          {product.tagline ? (
+            <p className="mt-1 text-sm font-semibold text-primary/90">{product.tagline}</p>
+          ) : null}
+        </div>
 
-        <p className="mt-3 text-sm leading-relaxed text-foreground/72">{product.description}</p>
+        <p className={cn("mt-3 text-sm leading-relaxed text-foreground/72", descriptionBlockClass)}>
+          {product.description}
+        </p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className={cn("mt-4 flex flex-wrap content-start gap-2", sizeRowClass)}>
           {product.variants.map((v) => {
             const active = v.id === variant?.id;
             return (
@@ -92,7 +101,7 @@ export function ProductCard({
           })}
         </div>
 
-        <ul className="mt-5 grid gap-2 text-sm text-foreground/70">
+        <ul className={cn("mt-5 grid content-start gap-2 text-sm text-foreground/70", benefitsBlockClass)}>
           {benefits.map((benefit) => (
             <li key={benefit} className="flex gap-2">
               <span className="mt-2 h-1.5 w-1.5 rounded-full bg-secondary" />
@@ -102,14 +111,15 @@ export function ProductCard({
         </ul>
 
         <div className="mt-auto pt-6">
-          <div className="surface-inset rounded-[24px] border border-border p-4">
-            <div className="flex items-end justify-between gap-4">
+          <div className={cn("surface-inset rounded-[24px] border border-border p-4", pricePanelClass)}>
+            <div className="flex h-full items-end justify-between gap-4">
               <div className="min-w-0 flex-1">
                 <PriceStack
                   retailPrice={retailPrice}
                   wholesalePrice={wholesalePrice}
                   language={language}
                   compact={compact}
+                  reserveSecondaryRow
                 />
                 <p className="mt-2 text-xs text-foreground/60">
                   {variant?.size
@@ -128,7 +138,7 @@ export function ProductCard({
 
               <Link
                 href={`/products/${product.id}?variant=${encodeURIComponent(variant?.id ?? product.variants[0]?.id ?? "")}`}
-                className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-[#140f22] shadow-[var(--shadow-brand-soft)] transition hover:bg-primary-2"
+                className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-white shadow-[var(--shadow-brand-soft)] transition hover:bg-primary-2 hover:text-white hover:shadow-[var(--shadow-brand)]"
                 aria-label={`View details for ${product.title}`}
               >
                 {pick(language, {

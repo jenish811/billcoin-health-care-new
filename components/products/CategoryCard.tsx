@@ -44,6 +44,9 @@ export function CategoryCard({
   const retailPrice =
     selectedVariant?.price ?? (selectedProduct?.priceFrom ? selectedProduct.priceFrom : undefined);
   const wholesalePrice = selectedVariant?.wholesalePrice;
+  const descriptionBlockClass = "min-h-[4.5rem]";
+  const sizeRowClass = "min-h-[3.25rem]";
+  const pricePanelClass = "min-h-[10rem]";
 
   const detailHref = selectedProduct
     ? `/products/${selectedProduct.id}?variant=${encodeURIComponent(selectedVariant?.id ?? selectedProduct.variants[0]?.id ?? "")}`
@@ -88,13 +91,18 @@ export function CategoryCard({
         </div>
 
         <div className="flex flex-1 flex-col p-6">
-          <p className="text-sm leading-relaxed text-foreground/72">
+          <p className={cn("text-sm leading-relaxed text-foreground/72", descriptionBlockClass)}>
             {getCategoryDescription(language, categoryKey, description)}
           </p>
 
           <div className="mt-auto pt-5">
-            <div className="surface-inset rounded-[20px] border border-border p-4">
-              <PriceStack retailPrice={retailPrice} wholesalePrice={wholesalePrice} language={language} />
+            <div className={cn("surface-inset rounded-[20px] border border-border p-4", pricePanelClass)}>
+              <PriceStack
+                retailPrice={retailPrice}
+                wholesalePrice={wholesalePrice}
+                language={language}
+                reserveSecondaryRow
+              />
               <p className="mt-2 text-xs text-foreground/60">
                 {selectedVariant?.size
                   ? `${pick(language, {
@@ -110,7 +118,7 @@ export function CategoryCard({
               </p>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className={cn("mt-5 flex flex-wrap content-start gap-2", sizeRowClass)}>
               {selectedProduct
                 ? selectedProduct.variants.map((variant) => {
                   const active = variant.id === selectedVariant?.id;

@@ -113,7 +113,7 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
               className={cn(
                 "whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition",
                 active
-                  ? "border-primary bg-primary text-[#140f22] shadow-[var(--shadow-brand-soft)]"
+                  ? "border-primary bg-primary text-white shadow-[var(--shadow-brand-soft)]"
                   : "border-border bg-card text-foreground/72 hover:bg-muted",
               )}
               aria-pressed={active}
@@ -143,5 +143,4 @@ export function ProductsExplorer({ initialCategory }: { initialCategory?: string
     </div>
   );
 }
-
 
