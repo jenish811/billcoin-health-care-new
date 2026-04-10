@@ -164,6 +164,31 @@ export const products: Product[] = [
     featured: true,
   },
   {
+    id: "matic-liquid",
+    category: "Liquid Detergent",
+    title: "Matic Liquid",
+    tagline: "Removes tough stains in 1 wash",
+    description:
+      "Machine-wash liquid detergent for front-load and top-load use with a strong-cleaning formula built for bulk laundry loads.",
+    benefits: [
+      "Removes tough stains in 1 wash",
+      "Front load compatible",
+      "Top load compatible",
+      "Bulk 5L pack",
+    ],
+    priceFrom: 350,
+    variants: [
+      {
+        id: "5l",
+        size: "5L",
+        image: "/images/matic-liquid-5l.jpeg",
+        price: 350,
+        wholesalePrice: 260,
+      },
+    ],
+    featured: true,
+  },
+  {
     id: "toilet-cleaner",
     category: "Toilet Cleaner",
     title: "Toilet Cleaner",
@@ -223,9 +248,27 @@ export const products: Product[] = [
     ],
     priceFrom: 60,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/surface-cleaner-rose.jpeg", price: 60, wholesalePrice: 50 },
-      { id: "1l", size: "1L", image: "/images/surface-cleaner-rose.jpeg", price: 90, wholesalePrice: 80 },
-      { id: "5l", size: "5L", image: "/images/surface-cleaner-rose.jpeg", price: 400, wholesalePrice: 350 },
+      {
+        id: "500ml",
+        size: "500ml",
+        image: "/images/surface-cleaner-rose-front.jpeg",
+        price: 60,
+        wholesalePrice: 50,
+      },
+      {
+        id: "1l",
+        size: "1L",
+        image: "/images/surface-cleaner-rose-front.jpeg",
+        price: 90,
+        wholesalePrice: 80,
+      },
+      {
+        id: "5l",
+        size: "5L",
+        image: "/images/surface-cleaner-rose-front.jpeg",
+        price: 400,
+        wholesalePrice: 350,
+      },
     ],
   },
   {

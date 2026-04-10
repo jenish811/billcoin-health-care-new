@@ -57,6 +57,7 @@ const heroStatCards = [
 export function HomePageContent() {
   const { language } = useAppPreferences();
   const featuredProducts = products.filter((product) => product.featured).slice(0, 6);
+  const homeProducts = products;
   const heroProducts = featuredProducts.slice(0, 3);
   const leadProduct = heroProducts[0];
 
@@ -295,25 +296,25 @@ export function HomePageContent() {
         <Container className="relative">
           <SectionHeading
             eyebrow={pick(language, {
-              en: "Best Sellers",
+              en: "All Products",
               hi: "बेस्ट सेलर्स",
               gu: "બેસ્ટ સેલર્સ",
             })}
             title={pick(language, {
-              en: "Products that now show their price clearly on the home screen",
+              en: "Every Billcoin product is now visible directly on the home page",
               hi: "ऐसे प्रोडक्ट जो अब होम स्क्रीन पर अपनी कीमत साफ दिखाते हैं",
               gu: "હવે હોમ સ્ક્રીન પર પોતાની કિંમત સ્પષ્ટ બતાવતા પ્રોડક્ટ્સ",
             })}
             description={pick(language, {
-              en: "This section is designed to make users feel ready to buy, not just browse.",
+              en: "Customers can browse the full range, compare sizes, and see pricing without leaving the home screen.",
               hi: "यह सेक्शन सिर्फ ब्राउज़ नहीं, बल्कि खरीदने की तैयारी महसूस करवाने के लिए बनाया गया है।",
               gu: "આ વિભાગ ફક્ત બ્રાઉઝ નહીં પરંતુ ખરીદવાની તૈયારી અનુભવાવવા માટે બનાવ્યો છે.",
             })}
             className="mb-10"
           />
 
-          <div className="grid gap-5 xl:grid-cols-3">
-            {featuredProducts.map((product) => (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {homeProducts.map((product) => (
               <ProductCard key={product.id} product={product} compact />
             ))}
           </div>
@@ -512,9 +513,6 @@ export function HomePageContent() {
     </div>
   );
 }
-
-
-
 
 
 
