@@ -81,7 +81,7 @@ export const productCategories: Array<{
       category: "Glass Cleaner",
       title: "Glass Cleaner",
       description: "Streak-free clarity for mirrors, windows, and glass surfaces.",
-      image: "/images/glass-cleaner-500ml.jpeg",
+      image: "/images/glass-cleaner-500ml-front.jpeg",
       sizes: ["500ml", "5L"],
     },
     {
@@ -229,7 +229,13 @@ export const products: Product[] = [
     ],
     priceFrom: 80,
     variants: [
-      { id: "500ml", size: "500ml", image: "/images/glass-cleaner-500ml.jpeg", price: 80, wholesalePrice: 70 },
+      {
+        id: "500ml",
+        size: "500ml",
+        image: "/images/glass-cleaner-500ml-front.jpeg",
+        price: 80,
+        wholesalePrice: 70,
+      },
       { id: "5l", size: "5L", image: "/images/glass-cleaner-1.jpeg", price: 470, wholesalePrice: 400 },
     ],
     featured: true,
